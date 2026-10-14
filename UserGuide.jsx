@@ -10,7 +10,7 @@ import {
     Barcode, User, ArrowUpDown, RefreshCcw, Briefcase, Undo, CheckCircle, AlertTriangle, Merge,
     Gift, Mail, Grid, Video, Layout, History, Link as IconLink, Monitor, Clock, Banknote
 } from 'lucide-react';
-import { USER_GUIDE_MANIFEST } from '../../data/userGuide';
+import { USER_GUIDE_MANIFEST } from './data/userGuide';
 
 const ICON_MAP = {
     Zap, Server, ShoppingCart, Archive, Shield, Settings, Sliders, Lock, Crown, Tag, ImageIcon,
@@ -142,7 +142,7 @@ const FormattedGuideContent = ({ content }) => {
                                 <div key={imgIdx} className="rounded-xl overflow-hidden flex flex-col">
                                     <div className="flex-1 flex justify-center items-center min-h-[50px]">
                                         <img
-                                            src={`assets/guide/${imageName}`}
+                                            src={new URL(`./assets/guide/${imageName}`, import.meta.url).href}
                                             alt={imageName}
                                             loading="lazy"
                                             style={{ maxHeight: maxH }}
@@ -227,7 +227,7 @@ const FormattedGuideContent = ({ content }) => {
     );
 };
 
-export const UserGuide = ({ onClose }) => {
+export const UserGuide = ({ onClose, defaultTab = 'TERMINAL_VENTE' }) => {
     const [activeTab, setActiveTab] = useState('TERMINAL_VENTE');
     const [activeArticleId, setActiveArticleId] = useState(null);
     const [currentSectionData, setCurrentSectionData] = useState(null);
