@@ -10,7 +10,7 @@ import {
     Barcode, User, ArrowUpDown, RefreshCcw, Briefcase, Undo, CheckCircle, AlertTriangle, Merge,
     Gift, Mail, Grid, Video, Layout, History, Link as IconLink, Monitor, Clock, Banknote
 } from 'lucide-react';
-import { USER_GUIDE_MANIFEST } from '../../data/userGuide';
+import { USER_GUIDE_MANIFEST } from './data/userGuide';
 
 const ICON_MAP = {
     Zap, Server, ShoppingCart, Archive, Shield, Settings, Sliders, Lock, Crown, Tag, ImageIcon,
@@ -142,7 +142,7 @@ const FormattedGuideContent = ({ content }) => {
                                 <div key={imgIdx} className="rounded-xl overflow-hidden flex flex-col">
                                     <div className="flex-1 flex justify-center items-center min-h-[50px]">
                                         <img
-                                            src={`assets/guide/${imageName}`}
+                                            src={new URL(`./assets/guide/${imageName}`, import.meta.url).href}
                                             alt={imageName}
                                             loading="lazy"
                                             style={{ maxHeight: maxH }}
@@ -227,7 +227,7 @@ const FormattedGuideContent = ({ content }) => {
     );
 };
 
-export const UserGuide = ({ onClose }) => {
+export const UserGuide = ({ onClose, defaultTab = 'TERMINAL_VENTE' }) => {
     const [activeTab, setActiveTab] = useState('TERMINAL_VENTE');
     const [activeArticleId, setActiveArticleId] = useState(null);
     const [currentSectionData, setCurrentSectionData] = useState(null);
@@ -468,7 +468,7 @@ export const UserGuide = ({ onClose }) => {
     return (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[1000] flex items-center justify-center p-3" onClick={onClose}>
             <div
-                className="bg-white w-[92vw] max-w-[1360px] h-[90vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden border-t-8 border-[#1e4e58] animate-in zoom-in-95 duration-150"
+                className="bg-white w-[92vw] max-w-[1560px] h-[95vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden border-t-8 border-[#1e4e58] animate-in zoom-in-95 duration-150"
                 onClick={e => e.stopPropagation()}
             >
                 {/* EN-TÊTE SUPÉRIEUR AVEC RECHERCHE GLOBALE */}

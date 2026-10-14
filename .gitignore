@@ -1,0 +1,9 @@
+# Logs et temporaires
+*.log
+_notes/
+dwsync.xml
+
+# Documentation générée
+structure_*.txt
+code_complet_*.txt
+extract_dev.bat
