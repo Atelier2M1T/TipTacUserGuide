@@ -466,9 +466,9 @@ export const UserGuide = ({ onClose, defaultTab = 'TERMINAL_VENTE' }) => {
     const activeManifest = USER_GUIDE_MANIFEST[activeTab];
 
     return (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[1000] flex items-center justify-center p-3" onClick={onClose}>
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[1000] flex items-center justify-center" onClick={onClose}>
             <div
-                className="bg-white w-[92vw] max-w-[1360px] h-[90vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden border-t-8 border-[#1e4e58] animate-in zoom-in-95 duration-150"
+                className="bg-white w-full h-full flex flex-col overflow-hidden border-t-8 border-[#1e4e58] animate-in zoom-in-95 duration-150"
                 onClick={e => e.stopPropagation()}
             >
                 {/* EN-TÊTE SUPÉRIEUR AVEC RECHERCHE GLOBALE */}
