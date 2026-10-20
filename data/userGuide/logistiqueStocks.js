@@ -346,7 +346,7 @@ export default {
                 [T]Traçabilité et arbitrage administratif
                 Si le stock d'un produit passe en négatif (ex : -1 ou -2), l'écart est instantanément journalisé en base de données.
                 Cette situation traduit généralement une vente croisée avec le Click & Collect ou un oubli de réception fournisseur.
-                Le responsable n'a pas à gérer ces écarts sous la pression de la file d'attente : il retrouve l'ensemble des références concernées dans le module [KEY: Anomalies d'Inventaire] du Back-Office pour opérer un comptage ou une régularisation à froid.
+                Le responsable n'a pas à gérer ces écarts sous la pression de la file d'attente : il retrouve l'ensemble des références concernées dans le module [LINK: ANALYTICS_REPORTING#anomalies-inventaire-stocks-negatifs | Anomalies d'Inventaire] du Back-Office pour opérer un comptage ou une régularisation à froid.
                 `
         }
     ]

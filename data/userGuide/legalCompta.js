@@ -38,10 +38,9 @@ export default {
                 [ST][ICON: Box | 20 | text-teal-600] 4. État des Stocks Valorisé :
                 Photographie exhaustive de la valeur comptable de votre stock magasin à l'instant T (calculée selon la formule [KEY: Quantité en rayon] x [KEY: Prix d'Achat unitaire HT]). L'export filtre automatiquement les articles non gérés en stock et exclut strictement les fiches dossiers parentes (Maîtres) pour garantir une valorisation d'inventaire sans aucun doublon.
                 
-                [📸 compta_hub_cloud_sync.jpg | md | right]
                 [T]Transmission automatique vers le siège (Réseau Cloud)
                 Si votre magasin fait partie d'une enseigne connectée à TipTac Cloud [PLAN: Plan Connect], un bandeau bleu apparaît. Le bouton [BTN: Pousser vers le Cloud] compile le package mensuel complet et le téléverse directement dans l'espace de stockage sécurisé du siège sans aucune manipulation manuelle de clé USB ou de pièces jointes par e-mail.
-                [CLEAR]
+                [📸 compta_hub_cloud_sync.jpg | md]
                 `
         },
         {

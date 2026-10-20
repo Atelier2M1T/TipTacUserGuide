@@ -53,7 +53,7 @@ export default {
                 
                 [T]Ajustement rapide de stock au comptoir (±)
                 Pour les articles simples ou les variantes individuelles, un bouton vert [BTN: ±] permet d'enregistrer une entrée de stock manuelle express dans une modale dédiée sans ouvrir la fiche complète du produit.
-                [WARNING]Règle de traçabilité comptable : Ce raccourci permet uniquement d'ajouter des unités positives. Tout retrait de stock doit obligatoirement être déclaré via le module Démarque avec sélection d'un motif légal (casse, vol, péremption, ...).
+                [WARNING]Règle de traçabilité comptable : Ce raccourci permet uniquement d'ajouter des unités positives. Tout retrait de stock doit obligatoirement être déclaré via le [LINK: LOGISTIQUE_STOCKS#demarque-casse-pertes | module Démarque] avec sélection d'un motif légal (casse, vol, péremption, ...).
                 `
         },
         {
@@ -126,7 +126,7 @@ export default {
                 — [KEY: Désignation Caisse] : Intitulé officiel imprimé sur le ticket et affiché sur l'écran tactile. La saisie applique automatiquement la règle de casse configurée dans votre magasin (tout en majuscules ou majuscule initiale).
                 — [KEY: Marque] : Sélectionnez une marque dans la liste déroulante fermée ou tapez un nouveau nom selon le mode configuré.
                 — [KEY: Référence Interne] : Code identifiant unique dans votre gestion (obligatoire).
-                — [KEY: Code EAN] : Code-barres à 13 chiffres pour la douchette. Si le produit n'a pas d'étiquette fabricant, cliquez sur [BTN: Générer] pour créer un code EAN-13 officiel calculé sur le préfixe propre à votre magasin (si vous l'avez d'abord défini dans le module de configuration, onglet «Préférences de vente»).
+                — [KEY: Code EAN] : Code-barres à 13 chiffres pour la douchette. Si le produit n'a pas d'étiquette fabricant, cliquez sur [BTN: Générer] pour créer un code EAN-13 officiel calculé sur le préfixe propre à votre magasin (si vous l'avez d'abord configuré dans [LINK: PARAMETRES_MAGASIN#regles-saisie-listes-codes-barres | Règles de Saisie & Codes-barres]).
                 — [KEY: Famille & Catégorie] : Classement de l'article dans l'arborescence du magasin.
                 — [KEY: Exclure du programme de fidélité] : Cochez cette case pour empêcher cet article d'octroyer des points lors des encaissements.
                 
@@ -165,7 +165,7 @@ export default {
                 
                 [📸 catalog_fiche_logistique_stocks.jpg | lg]
                 [T]Approvisionnement et conditions d'achat
-                — [KEY: Fournisseur Principal] : Choisissez le grossiste rattaché à cet article.
+                — [KEY: Fournisseur Principal] : Choisissez le grossiste rattaché à cet article (déclaré au préalable dans l'[LINK: ACHATS_FOURNISSEURS#annuaire-fournisseurs-conditions-achat | Annuaire Fournisseurs]).
                 — [KEY: Réf. Catalogue Fournisseur] : La référence exacte figurant sur les bons de commande d'achat et factures du fournisseur.
                 — [KEY: Colisage (PCB)] : Nombre d'unités conditionnées par carton ou barquette d'origine (ex : carton de 12 pièces). Lors des commandes d'achat, TipTac ajuste automatiquement les quantités commandées par multiples du PCB.
                 — [KEY: Minimum de Commande (MOQ)] : Seuil d'achat minimum imposé par le grossiste pour cette référence.

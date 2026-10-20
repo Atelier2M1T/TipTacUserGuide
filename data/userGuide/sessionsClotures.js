@@ -82,7 +82,7 @@ export default {
                 Cliquez sur le bouton [BTN: Tiroir] depuis le cockpit de caisse pour ouvrir le panneau d'enregistrement des flux.
                 
                 [ST][ICON: Unlock | 14 | text-teal-600] Bouton « OUVRIR SANS MONTANT » :
-                Le grand bouton supérieur permet de débloquer mécaniquement le tiroir pour une vérification rapide ou un échange de monnaie entre collègues. Cette action est immédiatement enregistrée dans le journal sous l'étiquette « OUVERTURE MANUELLE (FLASH) ».
+                Le grand bouton supérieur envoie une commande d'impulsion directe au tiroir-caisse (adaptée au pilote configuré : commandes directes en mode RAW/ESC-POS ou impulsion système). Cette ouverture mécanique sans flux financier est immédiatement scellée dans le journal d'audit NF525 sous le motif officiel [KEY: OUVERTURE MANUELLE (FLASH)].
                 
                 [ST][ICON: ArrowDownUp | 14 | text-teal-600] Enregistrer un flux chiffré :
                 Basculez entre le bouton vert [BTN: ENTRÉE] ou le bouton rouge [BTN: SORTIE], puis saisissez le montant précis au pavé numérique.
@@ -133,7 +133,6 @@ export default {
                 Cliquez sur [BTN: À Pointer] pour afficher les transactions du poste. Vous pouvez cocher chaque ligne individuellement ou cliquer sur le raccourci [BTN: Tout pointer] si le total de votre télécollecte correspond au centime près.
                 Si une ligne est décochée, le statut validé saute instantanément et exige une réconciliation complète.
                 
-                [📸 session_pointage_cheques_modal.jpg | right | md]
                 [ST][ICON: FileText | 14 | text-teal-600] Pointage des Chèques :
                 Procédez de même pour pointer la liasse physique des chèques face aux montants enregistrés sur le poste.[CLEAR]
                 
@@ -166,16 +165,18 @@ export default {
                 [📸 session_cloture_z_dashboard.jpg | lg]
                 [T]Tableau de bord de synthèse du Z
                 L'écran « Clôture Globale (Z) » rassemble et consolide l'ensemble des données d'activité de votre commerce :
-                — Le bandeau supérieur présente 3 indicateurs clés : [BTN: CA TOTAL TTC], [BTN: Panier Moyen] et le [BTN: Nombre de Tickets].
-                — La colonne de gauche détaille le montant et le nombre de règlements par moyen de paiement (Espèces, Carte Bancaire, Chèques, Avoirs, Cartes Cadeaux, Cagnotte Fidélité déduite et Ventes Web), ainsi que le Top 3 des rayons les plus vendeurs.
+                — Le bandeau supérieur présente 3 compteurs flash : [KEY: CA TTC], [KEY: Panier Moy.] et [KEY: Tickets].
+                — La colonne de gauche présente la grille compacte des paiements avec montants et volumes de transactions (traductions claires : [KEY: ESPÈCES], [KEY: CHÈQUES], [KEY: CAGNOTTE FIDÉLITÉ], [KEY: WEB / EN LIGNE]), ainsi que le [KEY: Top Rayons] (les 3 familles motrices avec montant de CA et jauge de contribution relative).
                 
                 [📸 session_detail_caisses.jpg | right | md]
-                [T]Consolidation poste par poste et boutique en ligne
-                La colonne de droite détaille le statut individuel de chaque terminal :
-                — Chaque caisse physique affiche son CA réalisé, l'écart de monnaie constaté (vert si positif, rouge si négatif), le montant du dépôt envoyé en banque et le fond restant laissé dans le tiroir.
-                — La « Boutique Web » [PLAN: Plan Commerce] est isolée en ligne dédiée : ses encaissements en ligne sont tracés sans générer de mouvements d'espèces ni fausser le tiroir physique.
-                — En pied de colonne, le gérant retrouve deux totaux financiers essentiels : 
-                le [BTN: Banque Total (Journée + Z)] et la [BTN: Caisse Globale (Restant)].
+                [T]Bilan par Caisse et équilibre comptable universel
+                La colonne de droite détaille la clôture physique de chaque terminal :
+                — Chaque poste détaille son CA propre, son badge d'écart [KEY: Écart] (gris si nul, vert si positif, rouge si déficit), son [KEY: Dépôt] bancaire prélevé et le fond [KEY: Laissé en caisse] pour le lendemain.
+                — Règle de calcul du fond théorique : le moteur se base en priorité sur le fond déclaré le matin (ou celui de la veille), additionne les ventes espèces et entrées diverses, puis déduit les sorties et dépôts réalisés en cours de journée.
+                — Formule comptable universelle du réel : le montant compté global consolide mathématiquement [KEY: Total Prélèvements + Total Laissé en caisse].
+                — En pied de colonne, deux synthèses financières automatisent votre remise :
+                  • [KEY: Banque Total (Journée + Z)] : cumule les dépôts effectués en cours de journée et les prélèvements de fin de service.
+                  • [KEY: Caisse Globale (Restant)] : somme exacte des espèces physiques restant dans les tiroirs de l'ensemble du magasin.
                 [CLEAR]
                 
                 [📸 session_force_z_modal.jpg | left | md]
@@ -205,19 +206,21 @@ export default {
                 Un bouton sécurisé temporisé permet de renvoyer une seconde copie thermique sans risque de bloquer la file d'impression.
                 [ST][ICON: FileText | 14 | text-teal-600] Bouton « FACTURE A4 » :
                 Formate l'ensemble de la clôture sur un document A4 prêt pour l'archivage classeur ou l'envoi en PDF à votre expert-comptable.
-                [ST][ICON: Lock | 14 | text-teal-600] Bouton « FERMER LA CAISSE » :
+                [ST][ICON: Lock | 14 | text-teal-600] Bouton « Fin Session » :
                 Verrouille définitivement le poste pour la nuit et ramène le terminal sur l'écran d'accueil sécurisé.
                 
                 [📸 session_ticket_z_complet.jpg | right | sm]
                 [T]Anatomie légale du Ticket Z thermique (NF525)
-                Le ticket imprimé sur papier thermique 80 mm contient l'ensemble des mentions fiscales obligatoires :
-                — L'identification juridique de votre magasin (Enseigne, Société, Ville, SIRET, TVA Intracommunautaire, Code NAF/APE, Capital et RCS).
-                — Le numéro d'archive séquentiel continu (ex : « CLÔTURE JOURNALIÈRE N° 42 ») et l'horodatage exact de l'édition.
-                — Les chiffres consolidés : CA Total TTC, Total HT, TVA totale collectée et la ventilation ligne par ligne par taux (20 %, 10 %, 5,5 %, 2,1 %) avec leur assiette HT respective.
-                — Le total des éco-participations collectées et les remises de fidélité accordées.
-                — Le tableau de répartition des encaissements (CB, Espèces, Chèques, Avoirs/Bons, Cartes Cadeaux, Paiements Web et Cagnotte Fidélité).
-                — Le détail de chaque tiroir physique avec fond initial, flux intermédiaires, prélèvements et le [BTN: TOTAL DÉPOSÉ EN BANQUE] imprimé en caractères inversés contrastés.
-                — La confrontation du [BTN: THÉORIQUE ATTENDU] face au [BTN: COMPTÉ (RÉEL)] avec mention lisible de l'[BTN: ÉCART CONSTATÉ].[CLEAR]
+                Le ticket imprimé sur papier thermique 80 mm structure l'audit fiscal complet :
+                — [KEY: En-tête légal] : Enseigne, forme juridique, ville, SIRET, RCS, NAF, TVA intra, numéro séquentiel inaltérable (ex : [KEY: CLÔTURE JOURNALIÈRE N° 42] ou [KEY: ARCHIVE N° Z-42] pour un duplicata) et plage de numérotation chronologique des tickets de la journée (ex : [KEY: Tickets : N° 1024 à N° 1089]).
+                — [KEY: Ventilation comptable du CA] : Total CA TTC et Total HT, accompagnés de la ventilation par nature d'activité : [KEY: Ventes négoce] (biens), [KEY: Production propre] et [KEY: Prestations services].
+                — [KEY: Retours et déductions] : Ligne distincte [KEY: Dont Retours (X)] isolant le nombre d'articles repris et le montant remboursé, montant des [KEY: Éco-participations] incluses et remises de cagnotte fidélité accordées.
+                — [KEY: Ventilation TVA par taux] : Détaille pour chaque taux légal la base soumise et le montant de taxe collecté (ex : [KEY: TVA 20% (HT: 150.00 €) : 30.00 €]).
+                — [KEY: Répartition des encaissements] : Détaille chaque mode de règlement perçu avec son volume de transactions (quantité). Les lignes dont le solde net est nul (0,00 €) sont automatiquement épurées pour une parfaite clarté.
+                — [KEY: Détail par Caisse & Web] : Liste chaque terminal physique (avec son CA, son écart, son dépôt, son fond laissé et la ventilation de ses paiements) ainsi que la ligne dédiée [KEY: 🌐 Boutique Web] pour les flux Click & Collect en ligne.
+                — [KEY: Mouvements de Tiroir] : Récapitule le fond initial, les ventes espèces, les entrées/sorties diverses, le montant [KEY: THÉORIQUE EN CAISSE], le [KEY: COMPTÉ (RÉEL)] et l'[KEY: ÉCART CONSTATÉ], suivi du [KEY: TOTAL DÉPOSÉ BANQUE] et du [KEY: FOND LAISSÉ POUR DEMAIN].
+                [NOTE]Archives Périodiques : Lors de l'édition d'une clôture mensuelle ou annuelle, les sections physiques de pointage de tiroir sont automatiquement masquées pour se concentrer sur les agrégats fiscaux et comptables.
+                [CLEAR]
                 
                 [T]Cumul Perpétuel Inaltérable et Signature Numérique SHA-256
                 Conformément aux normes anti-fraude NF525, deux sceaux cryptographiques terminent le reçu :

@@ -8,18 +8,15 @@ export default {
         {
             id: "navigation-backoffice-scopes",
             title: "1. Navigation dans le Back-Office et scopes de gestion",
-            // 📸 admin_hub_scopes_sidebar.jpg : Barre latérale rétractable de l'administration montrant la segmentation en univers (Catalogue, Stocks, Clients, Marketing, Légal, Paramètres).
-            // 📸 admin_bandeau_actions_rapides.jpg : Haut de la barre latérale mettant en avant les boutons d'action rapide colorés (Nouveau Produit, Scan & Go, Démarque).
-            // 📸 admin_alertes_cadenas_droits.jpg : Infobulle et alerte rouge lors d'un clic sur une section protégée par code superviseur ou bridée par forfait.
             content:
                 `
                 Le Back-Office d'administration regroupe tous les outils de pilotage stratégique, d'inventaire, de tarification et de gestion de votre établissement.
                 
                 Un rôle [PERM: Manager] ou [PERM: Admin] est requis pour naviguer librement dans la majorité des sections de configuration.
                 
-                [📸 admin_hub_scopes_sidebar.jpg | right | md]
+                [📸 admin_hub_scopes.jpg | right | md]
                 [T]Architecture par univers étanches
-                Pour éviter la dispersion et adapter l'écran aux missions de chaque collaborateur, l'administration est scindée en 7 univers spécialisés accessibles directement depuis les tuiles de l'AppHub :
+                Pour éviter la dispersion et adapter l'écran aux missions de chaque collaborateur, l'administration est scindée en 7 univers spécialisés accessibles directement depuis les tuiles de l'écran d'accueil :
                 — [KEY: PILOTAGE & STATS] : Pilotage commercial, comparaisons A/B et analyses de marges.
                 — [KEY: CATALOGUE & ARTICLES] : Gestion de la base articles, commandes d'achat fournisseurs et étiquettes linéaires.
                 — [KEY: STOCKS & INVENTAIRES] : Sessions d'inventaires, transferts entre magasins et registres de démarque.
@@ -47,9 +44,6 @@ export default {
         {
             id: "gestion-equipe-collaborateurs",
             title: "2. Annuaire de l'équipe, création et modification de fiches",
-            // 📸 admin_users_liste_filtres.jpg : Liste des collaborateurs avec boutons de filtre par rôle (Admin, Manager, Préparateur, Vendeur) et interrupteur des profils archivés.
-            // 📸 admin_user_fiche_edition.jpg : Formulaire de paramétrage d'un collaborateur avec nom, prénom, téléphone, email et saisie du code PIN 4-8 chiffres.
-            // 📸 admin_alerte_pin_doublon.jpg : Message d'erreur rouge lors de la saisie d'un code PIN déjà attribué à un autre membre du personnel.
             content:
                 `
                 Le module « Équipe & Droits » (accessible dans la section Paramètres) centralise la création, le paramétrage et la désactivation de tous les profils ayant accès aux caisses ou au Back-Office.
@@ -85,13 +79,10 @@ export default {
         {
             id: "matrice-roles-droits",
             title: "3. Les 4 rôles fondamentaux et attributions par défaut",
-            // 📸 admin_roles_comparatif_grille.jpg : Tableau comparatif des 4 rôles montrant la répartition des badges Admin, Manager, Préparateur et Vendeur.
-            // 📸 admin_user_compte_principal_lock.jpg : Fiche du collaborateur n°1 portant le badge orange « Compte Principal (Insupprimable) ».
             content:
                 `
                 TipTac articule sa sécurité autour de 4 rôles aux responsabilités bien délimitées :
                 
-                [📸 admin_roles_comparatif_grille.jpg | lg]
                 [T]1. ADMINISTRATEUR (Super-Utilisateur)
                 Réservé à la direction ou au propriétaire du commerce :
                 — Dispose des pleins pouvoirs sans aucune restriction sur tous les modules.
@@ -122,16 +113,13 @@ export default {
         {
             id: "personnalisation-permissions-fines",
             title: "4. Personnalisation des permissions fines",
-            // 📸 admin_permissions_interrupteurs_caisse.jpg : Grille des interrupteurs de permissions de caisse (Encaisser, Retours, Tiroir, Remises, Démarque, Clavier).
-            // 📸 admin_permissions_logistique_web.jpg : Section des interrupteurs logistiques (Commandes Web, Picking mobile, Fournisseurs).
-            // 📸 admin_bouton_enregistrer_flottant.jpg : Bouton d'action flottant en haut à droite passant de « À jour » à « Enregistrer le profil ».
             content:
                 `
                 Bien que chaque rôle applique une configuration automatique, TipTac permet d'ajuster individuellement chaque droit d'accès pour chaque membre de l'équipe.
                 
                 La fiche d'édition détaille les autorisations en 4 blocs ergonomiques :
                 
-                [📸 admin_permissions_interrupteurs_caisse.jpg | lg]
+                [📸 admin_permissions_acces_modules.jpg | lg]
                 [T]1. Accès aux Modules du Back-Office
                 Définissez les univers d'administration que le collaborateur peut ouvrir depuis le Hub :
                 — [KEY: Catalogue & Achats] : Consultation de la base produits et création de commandes d'approvisionnement.
@@ -139,6 +127,7 @@ export default {
                 — [KEY: Marketing] : Création d'offres promotionnelles et de campagnes.
                 — [KEY: Rapports & Stats] : Consultation des indicateurs de vente et de fréquentation.
                 
+                [📸 admin_permissions_interrupteurs_caisse.jpg | right | lg]
                 [T]2. Opérations de Caisse Tactile
                 Chaque interrupteur débloque ou verrouille une action précise au comptoir :
                 — [BTN: Encaisser les clients] : Accès direct au terminal de vente.
@@ -149,6 +138,7 @@ export default {
                 — [BTN: Modifier le clavier] : Donne accès au mode édition (liseré orange) pour réagencer les touches.
                 — [BTN: Clôture journalière (Z)] : Autorise la génération et l'impression du Z fiscal de fin de journée.
                 — [BTN: Associer un client a posteriori] : Permet de rattacher un ticket déjà scellé à une fiche client oubliée.
+                [CLEAR]
                 
                 [📸 admin_permissions_logistique_web.jpg | right | md]
                 [T]3. Logistique, E-commerce et Mobile
@@ -164,7 +154,6 @@ export default {
                 Il regroupe les droits de téléchargement des [BTN: Archives Fiscales], l'accès aux [BTN: Exports Comptables FEC] et les outils de [BTN: Contrôle DGFIP]. 
                 Pour des raisons de conformité, ces cases sont verrouillées en gris pour les vendeurs et préparateurs.
                 
-                [📸 admin_bouton_enregistrer_flottant.jpg | left | sm]
                 [T]Validation des modifications
                 Dès que vous modifiez un champ ou un interrupteur, le bouton flottant en haut à droite s'illumine en vert foncé avec la mention [BTN: Enregistrer le profil]. 
                 Cliquez dessus pour sauvegarder : les nouveaux droits prennent effet immédiatement sur tous les écrans sans redémarrer le logiciel.

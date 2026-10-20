@@ -334,7 +334,7 @@ export default {
                 — Choix de l'alignement (gauche, centré, droite) et de l'opacité générale.
                 — Intégration du logo et réglage de sa taille.
                 — Affichage des réseaux sociaux du magasin (texte seul, icônes vectorielles seules ou icônes avec texte).
-                — Injection automatique des coordonnées juridiques d'entreprise (Raison sociale, SIRET, RCS, Greffe, N° de TVA et capital) avec interrupteur pour les masquer sur les courriers strictement publicitaires.
+                — Injection automatique des coordonnées juridiques d'entreprise déclarées dans les [LINK: PARAMETRES_MAGASIN#mentions-legales-conformite-nf525 | Mentions légales obligatoires] (Raison sociale, SIRET, RCS, Greffe, N° de TVA et capital) avec interrupteur pour les masquer sur les courriers strictement publicitaires.
                 `
         }
     ]

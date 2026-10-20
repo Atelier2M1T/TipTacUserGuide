@@ -38,7 +38,7 @@ export default {
                 Une formule hybride associant un pavé numérique géant pour la saisie de prix, un panier aéré et une sélection de touches tactiles rapides.
                 
                  [📸 caisse_disposition_modulaire.jpg]
-                [TIP]La modification de la disposition s'effectue dans le module «Configuration Magasin et Matériel», onglet «Interfaces et Écrans».
+                [TIP]La modification de la disposition s'effectue dans [LINK: PARAMETRES_MAGASIN#identite-horaires-visuels | Configuration Magasin & Matériel] (onglet « Interfaces et Écrans »).
                 [📸 caisse_presets_disposition.jpg]
                 
                 [T]Inversion Gaucher / Droitier
@@ -143,7 +143,7 @@ export default {
             `
                 TipTac intègre un moteur de tarification promotionnelle capable d'appliquer des mécaniques complexes sans exiger de calculs de la part du personnel de caisse. 
                 [T]Déclenchement automatique des promotions en magasin
-                Le système évalue le panier à chaque ajout d'article et applique instantanément les offres actives configurées dans le magasin. Ci-dessous, quelques exemples : 
+                Le système évalue le panier à chaque ajout d'article et applique instantanément les [LINK: MARKETING_PROMOTIONS#gestion-offres-promotions | offres actives configurées dans le magasin]. Ci-dessous, quelques exemples : 
                 -Remises immédiates :En pourcentage (ex : -15 %) ou montants fixes en euros (-3,00 €). 
                 -Prix cassés et barèmes dégressifs :Selon le volume d'unités achetées. 
                 -Lots à prix figé :(ex : « Les 3 sacs de terreau pour 20,00 € »). 
@@ -177,7 +177,7 @@ export default {
                 - Validation : Touche [KEY: Entrée] : Valide la ligne de règlement ou scelle définitivement le ticket dès que le reste à payer atteint 0,00 €. 
                 [📸 caisse_raccourcis_paiement.jpg | h=80]
                 [T]Liaison Monétique TPE Automatisée (Protocole Concert) 
-                Si votre terminal de paiement bancaire est connecté à la caisse (en réseau Ethernet IP ou par câble série USB), le montant exact à payer lui est télétransmis automatiquement dès la sélection de la touche CB. L'écran de caisse affiche une animation « ATTENTE TPE » et se verrouille intégralement pour empêcher tout double encaissement ou annulation frauduleuse pendant que le client compose son code secret sur le clavier du lecteur. Dès que le terminal bancaire confirme la transaction, la ligne de paiement par carte est estampillée d'un cadenas de sécurité : elle devient totalement inaltérable et ne peut plus être supprimée du ticket. 
+                Si votre terminal de paiement bancaire est connecté à la caisse via la [LINK: PARAMETRES_MAGASIN#liaison-monetique-tpe-banque | liaison monétique Concert], le montant exact à payer lui est télétransmis automatiquement dès la sélection de la touche CB. L'écran de caisse affiche une animation « ATTENTE TPE » et se verrouille intégralement pour empêcher tout double encaissement ou annulation frauduleuse pendant que le client compose son code secret sur le clavier du lecteur. Dès que le terminal bancaire confirme la transaction, la ligne de paiement par carte est estampillée d'un cadenas de sécurité : elle devient totalement inaltérable et ne peut plus être supprimée du ticket. 
                 [📸 caisse_attente_tpe_verrouille.jpg]
                 [T]Calculateur de monnaie en gros caractères 
                 Lors d'un règlement en liquide, saisissez au pavé le montant des coupures remises par le client. TipTac calcule la différence et affiche immédiatement en grands caractères sur fond rouge le montant exact de la monnaie à lui rendre. 
@@ -251,6 +251,7 @@ export default {
                 Si un bon promotionnel ne permet aucun rendu de monnaie ni reliquat (usage unique) et que le client l'applique sur un achat d'un montant inférieur à sa valeur faciale, une fenêtre d'avertissement apparaît à l'écran. Elle indique précisément la somme qui sera définitivement perdue pour le client et exige une confirmation avant de valider l'opération. 
                 [📸 caisse_alerte_bon_usage_unique.jpg]
                 [T]3 modes d'exploitation du programme de fidélité au comptoir 
+                Ces options sont paramétrables dans le [LINK: CLIENTS_CRM#moteur-regles-fidelite | Moteur de Règles Fidélité] :
                 [ST]1. Bon d'achat papier :
                 Dès que le client atteint le seuil de points requis lors d'un passage en caisse, le système propose d'imprimer un bon thermique officiel avec code-barres unique, déduisant les points de son compte. 
                 [ST]2. Palier virtuel direct :
