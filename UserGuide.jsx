@@ -41,7 +41,7 @@ const FormattedGuideContent = ({ content }) => {
             }
             if (piece.startsWith('[KEY:')) {
                 const val = piece.replace('[KEY:', '').replace(']', '').trim();
-                return <span key={i} className="font-mono px-1.5 py-0.5 mx-1 bg-gray-100 whitespace-nowrap border border-gray-300 rounded text-blue-700 font-black text-xs shadow-sm">{val}</span>;
+                return <span key={i} className="font-mono px-1.5 py-0.5 mx-1 bg-gray-100 whitespace-nowrap border border-gray-300 rounded text-gray-700 font-black text-xs shadow-sm">{val}</span>;
             }
             if (piece.startsWith('[PERM:')) {
                 const val = piece.replace('[PERM:', '').replace(']', '').trim();

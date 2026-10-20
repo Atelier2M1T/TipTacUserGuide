@@ -55,8 +55,25 @@ export default {
                 Compresse la hauteur des lignes à 36 pixels. Cette densité permet d'afficher plus d'articles simultanément sans avoir recours au défilement vertical, un atout majeur pour les écrans tactiles 15 pouces standards de point de vente.
                 [📸 caisse_densite_panier_dense.jpg]
                 
-                [T]Écran Client Déporté
-                Si votre caisse est équipée d'un second moniteur tourné vers l'acheteur, TipTac y projette en continu une interface épurée et valorisante : logo de votre établissement, détail des articles bippés, économies obtenues grâce aux promotions, nom du client et solde de points. Dès que la fenêtre de paiement s'ouvre, l'écran client détaille la ventilation des règlements déjà perçus et le solde restant dû.
+                [T]Afficheur et Écran Client Déporté (Double Écran TV)
+                Si votre poste dispose d'un moniteur orienté vers l'acheteur, TipTac y projette une interface interactive en écran scindé (ratio 60/40) entièrement synchronisée en temps réel :
+                
+                [ST]Volet Gauche (60 % - Accueil & Programme de Fidélité) :
+                Sur un thème sombre valorisant, il accueille le client avec le logo haute définition de votre commerce :
+                — En attente de client : diffuse une invitation à adhérer au programme de fidélité du magasin.
+                — Client identifié : affiche un message d'accueil nominatif (« Heureux de vous revoir ! ») et détaille son solde de points. L'affichage s'adapte au mode de récompense configuré :
+                  • En mode Palier : jauge de progression bicolore et calcul automatique des points restants avant la réduction (ex : « Plus que 25 points avant votre bon ! »).
+                  • En mode Cagnotte Libre : valorisation instantanée en euros de la réserve d'argent utilisable immédiatement.
+                
+                [ST]Volet Droit (40 % - Panier interactif et Économies) :
+                Fait défiler les articles scannés au fil de l'eau avec défilement automatique :
+                — Met en valeur les promotions : prix initial barré, mise en évidence des cadeaux offerts, macarons des points bonus et intitulés des offres appliquées.
+                — Encart des remises globales : récapitule la remise fidélité panier, la remise contractuelle négociée du client (profil pro ou VIP) et la ligne synthétique valorisante : « Vous économisez au total : X € ».
+                — Total dynamique : s'illumine en vert foncé pour une vente ou bascule en orange contrasté en cas d'avoir ou de retour de marchandise.
+                
+                [ST]Mode Règlement en direct :
+                Dès l'ouverture de la fenêtre d'encaissement sur la caisse, l'écran client se fige en surimpression floutée :
+                Il affiche une animation de paiement, décompte au centime près les règlements mixtes déjà perçus (acomptes, bons d'achat, carte bancaire) et isole en très gros caractères le « Reste à payer » pour guider le client sans équivoque.
                 [📸 caisse_ecran_client.jpg]
                 
                 [T]Réglages de performances et de confort

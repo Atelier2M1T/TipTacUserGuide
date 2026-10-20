@@ -21,7 +21,7 @@ export default {
                 [T]Sélection de la période et 4 exports clés
                 Sélectionnez le mois calendaire souhaité dans le sélecteur supérieur (ex : « 2026-04 »), puis cliquez sur le bouton [BTN: Télécharger] de la carte correspondante :
                 
-                [ST][ICON: TrendingUp | 20 | text-blue-600] 1. Journal des Ventes (Code Journal VT) :
+                [ST][ICON: TrendingUp | 14 | text-teal-600] 1. Journal des Ventes (Code Journal VT) :
                 Génère le fichier détaillé de vos recettes jour par jour, ventilé par compte officiel du Plan Comptable Général :
                 — Recettes HT : comptes [KEY: 707000] (Marchandises), [KEY: 701000] (Produits finis) et [KEY: 706000] (Prestations de services).
                 — Acomptes & Titres cadeaux : compte [KEY: 419100] (Émission et encaissement de cartes cadeaux ou avoirs).
@@ -29,13 +29,13 @@ export default {
                 — Contreparties d'encaissements : comptes [KEY: 512000] (CB), [KEY: 531000] (Caisse Espèces), [KEY: 511200] (Remise Chèques) et [KEY: 512001] (Ventes Web).
                 — Régularisation des centimes d'arrondis : le système équilibre au centime près chaque journée en imputant automatiquement les écarts d'arrondis monétaires sur les comptes de charges diverses [KEY: 658000] ou de produits divers [KEY: 758000].
                 
-                [ST][ICON: DollarSign | 20 | text-purple-600] 2. Journal de Caisse (Code Journal OD) :
+                [ST][ICON: DollarSign | 14 | text-teal-600] 2. Journal de Caisse (Code Journal OD) :
                 Historique chronologique de l'ensemble des flux du tiroir non issus des ventes directes : apports de monnaie, achats de fournitures immédiates, prélèvements gérance et surtout l'ensemble des dépôts d'espèces envoyés en banque lors des fins de service.
                 
-                [ST][ICON: TrendingDown | 20 | text-red-600] 3. Démarque Comptable Réelle :
+                [ST][ICON: TrendingDown | 14 | text-teal-600] 3. Démarque Comptable Réelle :
                 Extraction de toutes les pertes, vols, casses et produits périmés déclarés dans le magasin. Le filtre comptable isole strictement les pertes valorisées au [KEY: Prix d'Achat HT réel] et exclut automatiquement les démarques théoriques ou erreurs de saisie pour donner au comptable le montant exact déductible du résultat.
                 
-                [ST][ICON: Box | 20 | text-teal-600] 4. État des Stocks Valorisé :
+                [ST][ICON: Box | 14 | text-teal-600] 4. État des Stocks Valorisé :
                 Photographie exhaustive de la valeur comptable de votre stock magasin à l'instant T (calculée selon la formule [KEY: Quantité en rayon] x [KEY: Prix d'Achat unitaire HT]). L'export filtre automatiquement les articles non gérés en stock et exclut strictement les fiches dossiers parentes (Maîtres) pour garantir une valorisation d'inventaire sans aucun doublon.
                 
                 [T]Transmission automatique vers le siège (Réseau Cloud)
@@ -137,13 +137,13 @@ export default {
                 [T]Les 3 fichiers obligatoires en cas de contrôle
                 Indiquez le mois calendaire à inspecter dans le sélecteur supérieur, puis générez les 3 archives d'audit demandées par l'agent vérificateur :
                 
-                [ST][ICON: FileText | 20 | text-red-600] 1. Le Fichier FEC Officiel (Format DGFIP) :
+                [ST][ICON: FileText | 14 | text-teal-600] 1. Le Fichier FEC Officiel (Format DGFIP) :
                 Génère le fichier réglementaire au format texte tabulé (TSV) normé selon les spécifications strictes de l'administration fiscale (portant le nommage officiel [KEY: {SIREN}FEC{AAAAMMJJ}.txt]).
                 — Il consigne ligne à ligne l'ensemble des écritures de vente du code journal « VT ».
                 — Chaque écriture regroupe toutes les lignes comptables d'une journée sous un numéro séquentiel unique avec référence à la clôture correspondante (ex : « Z-42 »).
                 — Il détaille les montants de débits et crédits pour les comptes de ventes, les acomptes/cartes cadeaux, la TVA par taux et les règlements financiers avec équilibrage parfait des arrondis.
                 
-                [ST][ICON: Lock | 20 | text-red-600] 2. La Bande de Contrôle (Détail inaltérable des tickets) :
+                [ST][ICON: Lock | 14 | text-teal-600] 2. La Bande de Contrôle (Détail inaltérable des tickets) :
                 Génère le fichier d'audit absolu retraçant l'intégralité des flux commerciaux ligne par ligne sur la période sélectionnée ([KEY: Bande_Controle_Tickets_{AAAA-MM}.csv]).
                 Chaque enregistrement détaille :
                 — L'identifiant du ticket et son numéro de séquence chronologique continu.
@@ -154,7 +154,7 @@ export default {
                 — La répercussion transparente au prorata exact des remises globales de panier ou bons d'achat sur chaque ligne d'article.
                 — Le montant net de la ligne, le total du ticket, le détail des modes de règlement et la signature cryptographique SHA-256 propre au ticket.
                 
-                [ST][ICON: Shield | 20 | text-red-600] 3. Le Grand Livre des Z :
+                [ST][ICON: Shield | 14 | text-teal-600] 3. Le Grand Livre des Z :
                 Exporte l'historique complet et inaltérable des clôtures de caisse du mois ([KEY: Grand_Livre_Clotures_{AAAA-MM}.csv]).
                 Ce document compile pour chaque Z journalier :
                 — Le numéro de clôture chronologique et sa date de validation.

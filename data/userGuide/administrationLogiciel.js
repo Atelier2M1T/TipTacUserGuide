@@ -56,7 +56,7 @@ export default {
                 [ST][ICON: ArrowUpDown | 20] Tri et visibilité :
                 Le bouton alphabétique inverse l'ordre de présentation (A-Z ou Z-A). L'icône en forme d'œil permet d'afficher ou masquer les anciens salariés dont les accès ont été suspendus.
                 
-                [📸 admin_user_fiche_edition.jpg | right | md]
+                [📸 admin_user_fiche_edition.jpg | right | lg]
                 [T]Création et paramétrage d'un compte
                 Cliquez sur le bouton [BTN: Nouveau Collaborateur] en haut à droite :
                 — Saisissez obligatoirement le [KEY: Prénom] et le [KEY: Nom de famille] du collaborateur.
@@ -188,7 +188,7 @@ export default {
                 [T]Chiffrement inaltérable des codes (Salage SHA-256)
                 Pour respecter les exigences strictes de la norme NF525 et du RGPD, aucun mot de passe ni code secret n'est conservé en clair dans la machine :
                 — Dès qu'un code PIN est enregistré dans le formulaire, il est combiné avec une clé de salage de sécurité propre au système.
-                — L'ensemble est immédiatement chiffré selon l'algorithme cryptographique irréversible [KEY: SHA-256].
+                — L'ensemble est immédiatement chiffré selon l'algorithme cryptographique irréversible SHA-256.
                 — Même en cas de consultation directe de la base de données ou du disque dur, il est mathématiquement impossible de retrouver les codes secrets de votre personnel.
                 
                 [WARNING]Oubli de code PIN : En raison du chiffrement à sens unique, il est impossible de « révéler » un code oublié. Si un collaborateur égare sa combinaison, un administrateur doit simplement ouvrir sa fiche dans le Back-Office pour lui attribuer un nouveau code.

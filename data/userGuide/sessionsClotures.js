@@ -185,9 +185,9 @@ export default {
                 Elle liste les terminaux encore ouverts et alerte le manager qu'une clôture autoritaire déclarera le contenu de leurs tiroirs comme totalement vide (0,00 €), générant un écart négatif égal au montant théorique non recompté.
                 
                 [WARNING]Protection anti-clic accidentel par jauge de maintien
+                [CLEAR]
                 Pour empêcher tout forçage involontaire irréversible, le bouton [BTN: MAINTENIR POUR FORCER] intègre une sécurité capacitive : vous devez maintenir votre doigt ou le clic de la souris enfoncé sans relâcher pendant 2 secondes consécutives. 
                 Une jauge rouge se remplit visuellement de 0 % à 100 % sous votre pression avant d'exécuter la fermeture forcée des sessions et de rouvrir l'écran du Z.
-                [CLEAR]
                 `
         },
         {
@@ -197,7 +197,7 @@ export default {
                 `
                 Dès la validation de la clôture, TipTac enregistre la journée dans la base inaltérable et ouvre la modale de finalisation avec impression automatique du ticket thermique officiel.
                 
-                [📸 session_modal_ticket_z.jpg | lg]
+                [📸 session_modal_ticket_z.jpg | xl | left]
                 [T]Organisation du panneau de finalisation
                 L'écran se compose d'une barre de commande à gauche et d'un visualiseur de reçu à droite :
                 [ST][ICON: CheckCircle | 14 | text-teal-600] Confirmation visuelle :
@@ -208,8 +208,9 @@ export default {
                 Formate l'ensemble de la clôture sur un document A4 prêt pour l'archivage classeur ou l'envoi en PDF à votre expert-comptable.
                 [ST][ICON: Lock | 14 | text-teal-600] Bouton « Fin Session » :
                 Verrouille définitivement le poste pour la nuit et ramène le terminal sur l'écran d'accueil sécurisé.
+                [CLEAR]
                 
-                [📸 session_ticket_z_complet.jpg | right | sm]
+                [📸 session_ticket_z_complet.jpg | right | xl]
                 [T]Anatomie légale du Ticket Z thermique (NF525)
                 Le ticket imprimé sur papier thermique 80 mm structure l'audit fiscal complet :
                 — [KEY: En-tête légal] : Enseigne, forme juridique, ville, SIRET, RCS, NAF, TVA intra, numéro séquentiel inaltérable (ex : [KEY: CLÔTURE JOURNALIÈRE N° 42] ou [KEY: ARCHIVE N° Z-42] pour un duplicata) et plage de numérotation chronologique des tickets de la journée (ex : [KEY: Tickets : N° 1024 à N° 1089]).
