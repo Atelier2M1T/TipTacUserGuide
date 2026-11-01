@@ -14,7 +14,7 @@ export default {
                 
                 [📸 session_hub_identifier.jpg | right | sm]
                 [T]Identification au Hub et contrôle d'accès
-                À l'allumage ou au retour sur le Hub (écran d'accueil de TipTac), cliquez sur le bouton [BTN: S'identifier] situé en bas à droite de l'écran (ou touchez directement la grande tuile [BTN: Terminal Caisse]).
+                À l'allumage ou au retour sur l'écran d'accueil de TipTac), cliquez sur le bouton [BTN: S'identifier] situé en bas à droite de l'écran (ou touchez directement la grande tuile [BTN: Terminal Caisse]).
                 
                 [ST][ICON: Shield | 14 | text-teal-600 ] Le pavé tactile PinPad :
                 Une fenêtre sécurisée présente un pavé numérique. Composez votre code secret personnel comprenant entre 4 et 8 chiffres, puis validez obligatoirement avec le bouton vert [BTN: OK].
@@ -23,7 +23,7 @@ export default {
                 Si votre équipe utilise des cartes ou badges personnalisés, bippez directement votre code-barres à la douchette. La caisse valide instantanément la frappe sans toucher à l'écran.
                 
                 [ST][ICON: User | 14 | text-teal-600 ] Profil actif et entrée directe :
-                Une fois authentifié, votre prénom et votre rôle apparaissent dans le bandeau inférieur. Si un vendeur ou un préparateur est déjà connecté sur le Hub, un clic sur la tuile [BTN: Terminal Caisse] ouvre directement l'écran de vente sans redemander de code !
+                Une fois authentifié, votre prénom et votre rôle apparaissent dans le bandeau inférieur. Si un vendeur ou un préparateur est déjà connecté sur l'écran d'accueil, un clic sur la tuile [BTN: Terminal Caisse] ouvre directement l'écran de vente sans redemander de code !
                 [CLEAR]
                 
                 [📸 session_relais_vendeur_f6.jpg | left | sm]

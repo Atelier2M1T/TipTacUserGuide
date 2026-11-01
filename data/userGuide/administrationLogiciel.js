@@ -14,7 +14,7 @@ export default {
                 
                 Un rôle [PERM: Manager] ou [PERM: Admin] est requis pour naviguer librement dans la majorité des sections de configuration.
                 
-                [📸 admin_hub_scopes.jpg | right | md]
+                [📸 admin_hub_scopes.jpg | right | xl]
                 [T]Architecture par univers étanches
                 Pour éviter la dispersion et adapter l'écran aux missions de chaque collaborateur, l'administration est scindée en 7 univers spécialisés accessibles directement depuis les tuiles de l'écran d'accueil :
                 — [KEY: PILOTAGE & STATS] : Pilotage commercial, comparaisons A/B et analyses de marges.
@@ -26,7 +26,7 @@ export default {
                 — [KEY: CONFIGURATION] : Configuration du magasin, imprimantes, TVA, matériel et équipe.
                 [CLEAR]
                 
-                [📸 admin_bandeau_actions_rapides.jpg | left | sm]
+                [📸 admin_bandeau_actions_rapides.jpg | left | md]
                 [T]Boutons d'actions rapides prioritaires
                 En tête de menu latéral, chaque univers met en exergue des boutons d'action d'urgence contrastés :
                 — En Catalogue : [BTN: Créer un produit] (vert émeraude) et [BTN: Scan & Go] (bleu ciel).
@@ -48,14 +48,15 @@ export default {
                 `
                 Le module « Équipe & Droits » (accessible dans la section Paramètres) centralise la création, le paramétrage et la désactivation de tous les profils ayant accès aux caisses ou au Back-Office.
                 
-                [📸 admin_users_liste_filtres.jpg | lg]
+                [📸 admin_users_liste_filtres.jpg | lg | left ]
                 [T]Consultation et tri de l'équipe
                 La colonne de gauche liste l'ensemble des membres déclarés :
                 [ST][ICON: Shield | 20] Filtrage rapide par rôle :
                 Quatre boutons permettent d'isoler en un clic les [BTN: Administrateurs], [BTN: Managers], [BTN: Préparateurs] ou [BTN: Vendeurs].
                 [ST][ICON: ArrowUpDown | 20] Tri et visibilité :
                 Le bouton alphabétique inverse l'ordre de présentation (A-Z ou Z-A). L'icône en forme d'œil permet d'afficher ou masquer les anciens salariés dont les accès ont été suspendus.
-                
+                [CLEAR]
+
                 [📸 admin_user_fiche_edition.jpg | right | lg]
                 [T]Création et paramétrage d'un compte
                 Cliquez sur le bouton [BTN: Nouveau Collaborateur] en haut à droite :
@@ -121,7 +122,7 @@ export default {
                 
                 [📸 admin_permissions_acces_modules.jpg | lg]
                 [T]1. Accès aux Modules du Back-Office
-                Définissez les univers d'administration que le collaborateur peut ouvrir depuis le Hub :
+                Définissez les univers d'administration que le collaborateur peut ouvrir depuis l'écran d'accueil :
                 — [KEY: Catalogue & Achats] : Consultation de la base produits et création de commandes d'approvisionnement.
                 — [KEY: Clients] : Recherche et consultation de l'annuaire CRM.
                 — [KEY: Marketing] : Création d'offres promotionnelles et de campagnes.

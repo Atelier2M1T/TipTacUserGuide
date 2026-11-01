@@ -87,7 +87,7 @@ export default {
                 — Si un format est incomplet ou invalide, le champ s'entoure d'un liseré rouge avec un message explicite (ex : « Le SIRET doit contenir exactement 14 chiffres »), et le bouton de sauvegarde reste désactivé jusqu'à correction.
                 
                 [📸 config_alerte_bloquante_siret.jpg | right | sm]
-                [WARNING]Barrière de sécurité légale : Si le SIRET, le nom commercial ou l'adresse du magasin ne sont pas renseignés, TipTac bloque totalement l'ouverture du Terminal Caisse et du module des Commandes Web. Un bandeau d'alerte rouge s'affiche sur le Hub pour imposer la régularisation de vos coordonnées d'entreprise.
+                [WARNING]Barrière de sécurité légale : Si le SIRET, le nom commercial ou l'adresse du magasin ne sont pas renseignés, TipTac bloque totalement l'ouverture du Terminal Caisse et du module des Commandes Web. Un bandeau d'alerte rouge s'affiche sur l'écran d'accueil pour imposer la régularisation de vos coordonnées d'entreprise.
                 [CLEAR]
                 `
         },
