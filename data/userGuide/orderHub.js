@@ -75,11 +75,10 @@ export default {
                 — Le système met en évidence la ligne en orange pour signaler l'écart.
                 — Cliquez sur [BTN: Valider (Incomplet)].
                 
-                [📸 orderhub_validation_incomplète_ruptures.jpg | left | md]
                 [ST]Scission et ajustement financier automatique :
                 Une fenêtre de [KEY: Validation Partielle] apparaît pour confirmer l'action.
                 En validant, le logiciel déclare officiellement les pièces non trouvées en rupture de stock. Le montant de la commande est automatiquement recalculé à la baisse pour correspondre à la marchandise réellement délivrée, et le client est averti par e-mail des articles manquants.
-                [CLEAR]
+                [📸 orderhub_validation_incomplete_ruptures.jpg | md]
                 `
         },
         {
@@ -101,7 +100,7 @@ export default {
                 
                 [📸 orderhub_documents_boutons_impression.jpg | right | md]
                 [T]Édition des documents logistiques
-                Le Hub propose d'imprimer les justificatifs de la commande pour accompagner le colis :
+                Le centre de gestion des commandes web propose d'imprimer les justificatifs de la commande pour accompagner le colis :
                 [ST][ICON: Printer | 14 | text-gray-600] Imprimer A4 (Bon de Livraison) :
                 Génère un document classique pleine page avec les coordonnées complètes du client, le récapitulatif détaillé des articles, les notes d'instructions de livraison et le code-barres de la commande.
                 
