@@ -442,6 +442,35 @@ export default {
                 [ST][ICON: Settings | 14 | text-sky-600] Accès fiche pour promotion :
                 Ouvre la fiche produit pour créer immédiatement une remise promotionnelle, une tête de gondole ou préparer un déstockage.
                 `
+        }, 
+        {
+            id: "audit-lignes-paniers-antifraude",
+            title: "15. Audit Anti-Fraude des Lignes et Paniers",
+            content:
+                `
+                Le rapport « Audit des Lignes & Paniers » offre une traçabilité chirurgicale de toutes les retouches, suppressions et annulations effectuées au comptoir sur les paniers en cours de saisie. Il s'agit du cœur du dispositif anti-coulage de votre établissement.
+
+                L'accès à ce journal d'audit est réservé aux utilisateurs disposant d'un rôle [PERM: Manager] ou [PERM: Admin].
+
+                [T]Classification intelligente du risque en 4 niveaux
+                Afin de ne pas noyer les responsables sous des alertes inutiles, le moteur d'audit évalue automatiquement le niveau de suspicion de chaque événement et de chaque session de panier :
+                — 🟢 Routine (Vert) : Corrections de fautes de frappe sur décimales (ex. 105,00 € corrigé en 10,50 €), ajustements sur articles à prix libre (sans prix catalogue fixe) et ajouts normaux d'articles.
+                — 🔵 Faible (Bleu) : Petites remises manuelles ou suppressions de lignes mineures effectuées avant toute tentative d'encaissement.
+                — 🟠 Modéré (Orange) : Vidage complet du panier réalisé avant paiement, remises / pertes significatives (> 25 €) ou retouches effectuées sur un ticket intégralement réglé par Carte Bancaire.
+                — 🔴 Risque Élevé (Rouge) : Suppressions de lignes catalogue à prix fixe, remises ou vidages de panier réalisés *après* l'ouverture de l'écran d'encaissement (particulièrement si la vente a été réglée en espèces ou est restée non encaissée).
+
+                [T]Deux modes de visualisation complémentaires
+                Le rapport propose deux manières d'explorer les données :
+                [ST]1. Mode Accordéon (Sessions - Par défaut) :
+                Regroupe les événements par session de panier (UUID unique). Chaque carte parent affiche l'horodatage, le vendeur, le poste de caisse, le badge de risque global de la session (calculé selon la pire anomalie de la séquence) et l'impact financier total de la perte. Cliquer sur la carte déroule l'historique des retouches.
+                [ST]2. Mode Liste (Tableau triable) :
+                Affiche la totalité des lignes de log à plat. Permet de trier en un clic par date, vendeur, type d'action, libellé d'article ou impact financier.
+
+                [T]Outils d'inspection approfondie & Boîte Noire
+                — [BTN: Voir la séquence globale] : Ouvre la boîte noire séquentielle d'une session pour retracer seconde par seconde le fil exact des actions de caisse (ajouts, modifications de quantités/prix, ouvertures de paiement, annulations) avec les vrais montants nets remisés et le détail des règlements de la vente finalisée.
+                — [BTN: Voir X article(s) effacé(s)] : Pour les événements de vidage complet de panier, permet de consulter le contenu exact des articles détruits et le motif d'annulation saisi par le caissier.
+                — Filtre [BTN: Suspicions Fortes] : Isole en un clic uniquement les sessions et événements classés en Risque Élevé (Rouge).
+                `
         }
     ]
 };

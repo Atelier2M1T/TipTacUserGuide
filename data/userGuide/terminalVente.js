@@ -419,6 +419,34 @@ export default {
                 Pour les opérations ne concernant qu'une sélection précise de produits (ex : « Vente flash sur 5 références d'outillage »), cliquez sur la carte de l'offre pour dérouler la liste nominative des articles inclus. Les désignations complètes sont traduites à la volée, évitant aux équipes d'avoir à manipuler ou mémoriser des références techniques. 
                 [📸 caisse_offre_accordeon_produits.jpg]
             `
+        }, 
+        {
+            id: "securite-audit-caisse",
+            title: "11. Sécurité, Audit des retouches et Abandon de panier",
+            content:
+                `
+                TipTac intègre des mécanismes de contrôle rigoureux pour sécuriser les manipulations au comptoir, prévenir les erreurs de saisie et garantir la traçabilité des annulations de ventes.
+
+                [T]Traçabilité et Audit des lignes
+                Toute action qui diminue le total du panier (suppression d'un article, remise manuelle, baisse de prix ou de quantité) est consignée dans le journal d'Audit Anti-Fraude du magasin.
+                Le système classe automatiquement chaque événement de caisse selon 4 niveaux de risque (Routine, Faible, Modéré, Élevé) en analysant son contexte :
+                — Routine (Vert) : La correction d'une erreur de décimale évidente (ex. 105,00 € corrigé en 10,50 €) ou l'ajustement du montant d'un article à prix libre ne déclenche aucune alerte, même si l'écran d'encaissement a déjà été ouvert.
+                — Faible à Modéré (Bleu/Orange) : Les retouches classiques, les remises manuelles ou les vidages complets de panier survenant avant la phase de paiement sont isolés mais considérés comme des ajustements standards.
+                — Risque Élevé (Rouge) : Toute suppression ou baisse de prix d'un produit du catalogue survenant après l'ouverture de l'écran d'encaissement constitue une anomalie majeure. Cette règle protège le commerce contre les manipulations où le client a vu le total, mais où la ligne est ensuite retirée du système.
+
+                [T]Vidage sécurisé du panier (Clear Cart)
+                Lorsque vous cliquez sur le bouton de vidage du panier (icône de corbeille), une fenêtre de confirmation s'affiche pour éviter les suppressions accidentelles.
+                — Alternatives d'abord : Le système vous suggère prioritairement des solutions douces comme [BTN: Mettre en attente] ou [BTN: Créer un Devis] si vous ne souhaitez pas perdre la saisie.
+                — Motif de vidage obligatoire : Si vous confirmez l'annulation totale de la vente, vous devez sélectionner une raison parmi une liste (Erreur de saisie, Abandon client, Paiement refusé, Passage sur autre caisse...) ou rédiger une note personnalisée via l'option "Autre".
+                Ce motif et la composition exacte du panier supprimé sont envoyés dans le journal d'audit pour les responsables.
+
+                [T]Protection contre l'abandon de caisse
+                Si vous tentez de quitter le terminal de vente (retour au menu principal de l'application) alors qu'une vente contenant des articles est toujours ouverte, une modale rouge « Panier non encaissé ! » bloque instantanément votre sortie.
+                Trois choix s'offrent alors à vous pour sécuriser l'opération :
+                1. [BTN: Mettre le panier en attente & Quitter] : Option recommandée qui gèle la vente en cours pour vous permettre de la reprendre plus tard depuis l'onglet des paniers suspendus.
+                2. [BTN: Abandonner le panier & Quitter...] : Détruit définitivement la vente en cours, mais exige obligatoirement la saisie d'un motif textuel explicatif avant de vous autoriser à fermer l'écran.
+                3. [BTN: Rester en caisse] : Annule la tentative de sortie et vous replace face au panier intact.
+                `
         }
     ]
 };
