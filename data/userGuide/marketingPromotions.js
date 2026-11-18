@@ -27,7 +27,7 @@ export default {
                 Tapez par exemple : « Fais 20% de remise sur le rayon Outillage ce week-end » ou « Passe la remise à 15% et rends-la cumulable ».
                 L'assistant configure instantanément le formulaire : il nomme l'opération, cible la bonne famille de produits, paramètre le taux, renseigne les dates de début et de fin et coche les jours actifs correspondants. Il ne vous reste plus qu'à vérifier et enregistrer !
                 
-                [📸 marketing_promotions_formulaire.jpg | right | lg]
+                [📸 marketing_promotions_formulaire.jpg | right | xl]
                 [T]Canaux de diffusion et codes promotionnels
                 Lors de la création manuelle (bouton [BTN: Nouvelle Opération]), vous choisissez l'environnement d'application :
                 — [KEY: Omnicanal] : Valable simultanément sur vos caisses tactiles de magasin et sur votre site e-commerce.
@@ -59,11 +59,10 @@ export default {
                 `
                 Le moteur de tarification évalue le panier en direct à chaque ajout d'article et recalcule instantanément le tarif le plus avantageux.
                 
-                [📸 marketing_mecaniques_selection_types.jpg | lg | right]
+                [📸 marketing_mecaniques_selection_types.jpg | xl | right]
                 [T]1. Remises Immédiates
                 [ST][ICON: Percent | 14 | text-teal-600] Remise en pourcentage (%) :
                 Déduit un pourcentage sur les articles éligibles (ex : -15 %) dès 1 unité ou à partir d'un seuil de quantité requis (ex : -20 % dès 3 achetés).
-                [CLEAR]
                 
                 [ST][ICON: Tag | 14 | text-teal-600] Remise en montant fixe (€) :
                 Applique une réduction brute en euros sur chaque produit (ex : -3,00 € par article).
@@ -97,7 +96,8 @@ export default {
 
                 [ST][ICON: Gift | 14 | text-teal-600] Bon d'achat différé (€) sur sélection ou panier :
                 Édite automatiquement un bon d'achat lors de la clôture du ticket si le client atteint un seuil précis (en montant ou en quantité) sur une sélection d'articles ou sur tout le panier. Vous paramétrez à l'avance les restrictions du futur bon (valable du X au Y, uniquement sur un rayon précis, avec un minimum d'achat). Idéal pour la fidélisation ciblée (ex: « 5 € offerts dès 25 € d'achat, valables le mois prochain sur le rayon Sapins »).
-                
+                [CLEAR]
+
                 [T]4. Mécaniques de Panier et Logistique
                 [ST][ICON: ShoppingBag | 14 | text-teal-600] Remises de Panier par Palier ou par Tranches :
                 Accorde une remise forfaitaire en euros ou en pourcentage selon le montant brut du ticket de caisse :
@@ -115,7 +115,7 @@ export default {
                 `
                 Le module « Bons d'Achat » (accessible depuis les univers Marketing et Clients) permet d'émettre des titres de paiement à code-barres unique utilisables au comptoir ou sur le web.
                 
-                [📸 marketing_generateur_bons_formulaire.jpg | lg]
+                [📸 marketing_generateur_bons_formulaire.jpg | 2xl]
                 [T]Paramétrage de la valeur et des restrictions
                 Dans l'onglet [BTN: Générateur], configurez les modalités du titre :
                 [ST][ICON: Ticket | 14 | text-teal-600] Montant et Période de validité :
@@ -139,9 +139,10 @@ export default {
                 Recherchez et cochez un ou plusieurs clients de votre annuaire CRM. Le bon sera lié à leur profil personnel : la caisse refusera formellement son application si un autre compte client est ouvert au comptoir.
                 [CLEAR]
                 
-                [📸 marketing_vouchers_impression_choix.jpg | md]
                 [T]Double format d'impression : Thermique 80 mm vs A4
                 Dès que vous validez la création, la modale d'édition s'affiche pour vous permettre de choisir le support physique :
+                [📸 marketing_vouchers_impression_choix.jpg | md]
+
                 [ST][ICON: Printer | 14 | text-teal-600] Format Thermique (80 mm) :
                 Édite un coupon de caisse comportant le logo du magasin, le nom du bénéficiaire, la valeur en très gros caractères, la synthèse des restrictions d'achat, le code-barres scannable en technologie CODE128 et l'horodatage.
                 
@@ -164,7 +165,7 @@ export default {
                 — [KEY: Taux de Rachat (%)] : Pourcentage des bons ayant été consommés en caisse face au total des émissions.
                 — [KEY: CA Absorbé] : Montant exact en euros des réductions consommées lors des encaissements en magasin.
                 
-                [📸 marketing_vouchers_tableau_actions.jpg]
+                [📸 marketing_vouchers_tableau_actions.jpg | 2xl]
                 [T]Filtrage par origine et état du titre
                 Trois filtres permettent d'isoler la nature des bons :
                 — [BTN: Tous] : Vue d'ensemble du passif commercial.
@@ -196,7 +197,7 @@ export default {
                 
                 L'utilisation de l'éditeur de campagnes e-mail requiert une formule [PLAN: Commerce] ou supérieure.
                 
-                [📸 marketing_editeur_email_vue_globale.jpg | xl]
+                [📸 marketing_editeur_email_vue_globale.jpg | 2xl]
                 [T]Les 8 composants modulaires d'e-mail
                 Dans la boîte à outils latérale droite, cliquez sur un composant pour l'insérer sur votre maquette :
                 — [KEY: Logo du Magasin] : Insère automatiquement le logo officiel de votre enseigne avec curseur d'ajustement de la taille de 10 % à 100 %.
@@ -221,10 +222,9 @@ export default {
                 Maintenez le clic enfoncé sur cette poignée pour déplacer le composant vers le haut ou le bas. Une barre verte indique l'emplacement de destination avant de relâcher.
                 Le menu latéral à trois points présent sur chaque bloc permet de [BTN: Dupliquer] ou [BTN: Supprimer] le bloc en un clic.
                 
-                [📸 marketing_tags_variables_cliquables.jpg | left | sm]
+                [📸 marketing_tags_variables_cliquables.jpg | left | 2xl]
                 [T]Variables dynamiques et tags cliquables
                 Pour personnaliser vos courriers avec le prénom du destinataire ou les informations de votre commerce, cliquez sur les étiquettes de la boîte à outils pour copier automatiquement le jeton dans votre presse-papier :
-                [CLEAR]
                 — [KEY: {{prenom}}] : Prénom de l'acheteur (remplacé automatiquement lors de la distribution).
                 — [KEY: {{enseigne}}] : Nom commercial du magasin.
                 — [KEY: {{adresse}}] : Adresse postale complète.

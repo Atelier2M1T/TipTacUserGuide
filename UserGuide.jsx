@@ -108,6 +108,7 @@ const FormattedGuideContent = ({ content }) => {
         else if (params.includes('md')) maxH = "280px";
         else if (params.includes('lg')) maxH = "380px";
         else if (params.includes('xl')) maxH = "500px";
+        else if (params.includes('2xl')) maxH = "650px";
 
         let align = 'center';
         if (params.includes('left')) align = 'left';
