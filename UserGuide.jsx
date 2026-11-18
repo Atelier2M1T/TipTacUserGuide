@@ -363,6 +363,15 @@ export const UserGuide = ({ onClose, defaultTab = 'TERMINAL_VENTE' }) => {
         }
     };
 
+    // 3.5 Réinitialisation du défilement au changement de chapitre
+    useEffect(() => {
+        if (scrollContainerRef.current) {
+            // On utilise 'instant' ou 'auto' au lieu de 'smooth' pour éviter un effet 
+            // de glissement désagréable lors du changement radical de contenu.
+            scrollContainerRef.current.scrollTo({ top: 0, behavior: 'auto' });
+        }
+    }, [activeTab]);
+
     // 4. Moteur de recherche globale cross-chapitres avec Fuse.js
     useEffect(() => {
         if (!globalSearch.trim() || globalSearch.trim().length < 2) {

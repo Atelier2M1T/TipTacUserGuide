@@ -27,7 +27,7 @@ export default {
                 Tapez par exemple : « Fais 20% de remise sur le rayon Outillage ce week-end » ou « Passe la remise à 15% et rends-la cumulable ».
                 L'assistant configure instantanément le formulaire : il nomme l'opération, cible la bonne famille de produits, paramètre le taux, renseigne les dates de début et de fin et coche les jours actifs correspondants. Il ne vous reste plus qu'à vérifier et enregistrer !
                 
-                [📸 marketing_promotions_formulaire.jpg | right | xl]
+                [📸 marketing_promotions_formulaire.jpg | xl | right]
                 [T]Canaux de diffusion et codes promotionnels
                 Lors de la création manuelle (bouton [BTN: Nouvelle Opération]), vous choisissez l'environnement d'application :
                 — [KEY: Omnicanal] : Valable simultanément sur vos caisses tactiles de magasin et sur votre site e-commerce.
@@ -222,15 +222,18 @@ export default {
                 Maintenez le clic enfoncé sur cette poignée pour déplacer le composant vers le haut ou le bas. Une barre verte indique l'emplacement de destination avant de relâcher.
                 Le menu latéral à trois points présent sur chaque bloc permet de [BTN: Dupliquer] ou [BTN: Supprimer] le bloc en un clic.
                 
-                [📸 marketing_tags_variables_cliquables.jpg | left | 2xl]
+                [📸 marketing_tags_variables_cliquables.jpg | left | xl]
                 [T]Variables dynamiques et tags cliquables
                 Pour personnaliser vos courriers avec le prénom du destinataire ou les informations de votre commerce, cliquez sur les étiquettes de la boîte à outils pour copier automatiquement le jeton dans votre presse-papier :
+
                 — [KEY: {{prenom}}] : Prénom de l'acheteur (remplacé automatiquement lors de la distribution).
                 — [KEY: {{enseigne}}] : Nom commercial du magasin.
                 — [KEY: {{adresse}}] : Adresse postale complète.
                 — [KEY: {{telephone}}] et [KEY: {{website}}] : Coordonnées de contact.
                 — [KEY: {{horaires}}] : Planning hebdomadaire complet d'ouverture.
                 — [KEY: {{horaires_speciaux}}] : Prochaines ouvertures ou fermetures exceptionnelles (jours fériés, inventaires).
+                — [KEY: {{facebook}}] : Affiche l'adresse de votre page Facebook ou ajoute le lien dynamiquement dans un bouton.
+                Même fonctionnement pour les autres réseaux sociaux.
                 [CLEAR]
                 
                 [T]Pied de page légal et conformité de désinscription
@@ -309,8 +312,8 @@ export default {
                 — Documents de vente : [KEY: Ticket], [KEY: Facture], [KEY: Devis], [KEY: Bon / Carte].
                 — Commandes Web Click & Collect et Expéditions : [KEY: Confirmation], [KEY: Reçu Paiement], [KEY: Validée], [KEY: Prête], [KEY: Expédiée], [KEY: Annulée] et [KEY: Demande d'avis].
                 
-                [📸 marketing_bloc_systeme_obligatoire_recap.jpg | left | md]
                 [WARNING]Protection des Blocs Systèmes Obligatoires :
+                [📸 marketing_bloc_systeme_obligatoire_recap.jpg | left | xl]
                 Les e-mails transactionnels intègrent des blocs indispensables à la validité juridique de la transaction (comme le récapitulatif détaillé du panier, la ventilation des montants de TVA ou le code-barres de la carte cadeau). 
                 Ces blocs portent la mention « [ Bloc Système Dynamique ] - Obligatoire » : ils peuvent être déplacés pour aménager la mise en page mais ne peuvent en aucun cas être supprimés du document.
                 [CLEAR]
