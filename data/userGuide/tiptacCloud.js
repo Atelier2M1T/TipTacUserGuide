@@ -135,6 +135,7 @@ export default {
                 — [ICON: Truck | 14 | text-blue-700] [LINK: ACHATS_FOURNISSEURS | Achats, Fournisseurs & Réceptions] : Commandes d'approvisionnement et franco de port.
                 — [ICON: ClipboardList | 14 | text-sky-600] [LINK: LOGISTIQUE_STOCKS | Logistique, Inventaires & Démarque] : Audit des pertes, transferts réseau et registre des mouvements.
                 — [ICON: Globe | 14 | text-[#1e4e58]] [LINK: WEBSETTINGS_MANAGER | Boutique en Ligne & Site Web] : Personnalisation de votre vitrine E-commerce et pages CMS.
+                — [ICON: ShoppingBag | 14 | text-red-700] [LINK: ANALYTICS_REPORTING#audit-lignes-paniers-antifraude | Audit & Sécurité] : Surveillance des retouches de paniers et alertes anti-fraude.
                 `
         },
         {
@@ -166,6 +167,34 @@ export default {
                 [TIP]Accès rapide et biométrie : Lorsque vous lancez TipTac Cloud depuis votre écran d'accueil, vous pouvez mémoriser vos identifiants ou utiliser le gestionnaire de mots de passe de votre téléphone (Face ID, Touch ID ou empreinte digitale) pour déverrouiller instantanément votre console en mobilité.
                 
                 [WARNING]Rappel sur le navigateur iOS : Sur iPhone, les navigateurs alternatifs (comme Chrome iOS ou Firefox iOS) ne permettent pas toujours d'ajouter directement une Web App à l'écran d'accueil. Veillez à bien ouvrir l'adresse dans Safari pour finaliser l'installation.
+                `
+        },
+        {
+            id: "cloud-audit-paniers-antifraude",
+            title: "7. Audit Anti-Fraude multi-sites et supervision des paniers",
+            // 📸 cloud_audit_paniers_dashboard.jpg : Tableau de bord de l'audit des paniers sur le Cloud avec les KPIs de pertes et les filtres multi-magasins.
+            // 📸 cloud_audit_paniers_timeline.jpg : Modale de la boîte noire séquentielle vue depuis le Cloud avec le ticket certifié.
+            content:
+                `
+                TipTac Cloud centralise en temps réel l'ensemble des journaux d'audit de sécurité de vos magasins. Le module « Audit des Lignes & Paniers » vous permet de superviser les opérations sensibles au comptoir (annulations, remises manuelles, vidages de paniers) pour tout votre réseau, à distance.
+
+                [📸 cloud_audit_paniers_dashboard.jpg | xl]
+                [T]Supervision consolidée et temps réel
+                Contrairement à la caisse qui limite l'audit à son propre historique, la console Cloud agglomère les événements de tous vos points de vente :
+                — [KEY: Sélecteur de Magasin] : Filtrez instantanément les événements suspects d'une succursale spécifique ou affichez la vue « Réseau (Tous) » pour auditer l'ensemble du parc.
+                — [KEY: Remontée immédiate] : Les logs sont transmis au Cloud toutes les 5 minutes. Une anomalie survenue en boutique est quasiment visible en direct par la direction.
+
+                [T]Filtres avancés et investigation
+                L'interface Cloud reprend l'ergonomie de la caisse (Mode Sessions et Mode Lignes) en l'enrichissant de filtres adaptés à la supervision réseau :
+                — [BTN: Filtrer par vendeur] : Suivez le comportement d'un collaborateur spécifique, même s'il a travaillé sur plusieurs caisses ou magasins différents au cours du mois.
+                — [BTN: Filtrer par poste] : Identifiez si un terminal spécifique concentre un taux anormal de retouches après encaissement.
+                
+                [📸 cloud_audit_paniers_timeline.jpg | lg | left]
+                [T]Boîte noire et inspection du ticket certifié
+                Lorsqu'une session de panier éveille vos soupçons, l'outil Cloud vous permet de mener l'enquête jusqu'au bout sans déranger le magasin :
+                — [KEY: Séquence temporelle] : Ouvrez la boîte noire pour rejouer l'ordre exact des suppressions ou ajustements tarifaires à la seconde près.
+                — [KEY: Consultation du ticket final] : Un clic sur le bouton bleu [BTN: Ticket N°...] télécharge depuis l'entrepôt BigQuery la copie authentique et certifiée du ticket d'origine. Vous visualisez les moyens de paiement utilisés (ex: Espèces vs CB) pour confirmer ou lever le doute sur un comportement suspect.
+                [CLEAR]
                 `
         }
     ]

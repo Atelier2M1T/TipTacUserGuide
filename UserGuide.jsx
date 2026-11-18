@@ -19,7 +19,8 @@ const ICON_MAP = {
     Percent, CircleQuestionMark, Layers, CornerDownLeft, Calculator, ArrowDownUp, Printer,
     Coins, Building, CreditCard, ShieldCheck, List, FileText, Unlock, TrendingUp, DollarSign,
     TrendingDown, Barcode, User, ArrowUpDown, RefreshCcw, Briefcase, Undo, CheckCircle, AlertTriangle,
-    Merge, Gift, Star, Calendar, Mail, Grid, Video, Layout, History, IconLink, Monitor, Clock, Banknote
+    Merge, Gift, Star, Calendar, Mail, Grid, Video, Layout, History, IconLink, Monitor, Clock, Banknote,
+    ShoppingBag, Ban
 };
 
 // Rendu dynamique du texte avec support multi-images, alertes, boutons, permissions et structuration (Titres/Sous-titres)
