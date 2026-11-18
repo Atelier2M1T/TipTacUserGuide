@@ -8,7 +8,7 @@ import {
     CornerDownLeft, Calculator, ArrowDownUp, Printer, Coins, Building, CreditCard, Store,
     ShieldCheck, List, FileText, Unlock, TrendingUp, DollarSign, TrendingDown, Calendar,
     Barcode, User, ArrowUpDown, RefreshCcw, Briefcase, Undo, CheckCircle, AlertTriangle, Merge,
-    Gift, Mail, Grid, Video, Layout, History, Link as IconLink, Monitor, Clock, Banknote
+    Gift, Mail, Grid, Video, Layout, History, Link as IconLink, Monitor, Clock, Banknote, ShoppingBag, Ban
 } from 'lucide-react';
 import { USER_GUIDE_MANIFEST } from './data/userGuide';
 
