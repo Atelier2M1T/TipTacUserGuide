@@ -256,6 +256,12 @@ export default {
                 — [KEY: Validité des bons d'achat & fidélité] : Fixez l'échéance des bons promotionnels et des récompenses du programme de fidélité (par défaut [KEY: 6 mois]).
                 — [KEY: Validité des cartes cadeaux] : Durée de consommation des titres cadeaux vendus au comptoir (par défaut [KEY: 12 mois]).
                 
+                [T]Acomptes & Réservations sur Devis
+                Configurez le comportement par défaut appliqué lors de la prise d'acompte sur un devis ou une commande en caisse :
+                — [KEY: % d'acompte suggéré par défaut] : Renseignez un pourcentage entre 1 % et 99 % (ou laissez vide pour une saisie libre). Dès l'ouverture de la modale d'acompte en caisse, le montant suggéré est pré-calculé automatiquement sur le total de la commande.
+                — [KEY: Durée de réservation par défaut (jours)] : Définissez le nombre de jours avant expiration de la commande (ou laissez vide pour une durée libre) afin de pré-remplir automatiquement la date limite de retrait.
+                — [KEY: Cocher par défaut « Réserver les articles disponibles en stock » lors de la prise d'acompte] : Active par défaut la mise de côté des quantités disponibles en magasin ; les unités réservées sont immédiatement retirées des quantités vendables sur votre site e-commerce jusqu'au solde ou à l'annulation de la commande.
+                
                 [📸 config_preferences_cartes_cadeaux.jpg | right | md]
                 [T]Vente et paramétrage des Cartes Cadeaux
                 Facilitez la vente de titres cadeaux au comptoir grâce à une personnalisation tactile :

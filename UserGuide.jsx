@@ -8,7 +8,8 @@ import {
     CornerDownLeft, Calculator, ArrowDownUp, Printer, Coins, Building, CreditCard, Store,
     ShieldCheck, List, FileText, Unlock, TrendingUp, DollarSign, TrendingDown, Calendar,
     Barcode, User, ArrowUpDown, RefreshCcw, Briefcase, Undo, CheckCircle, AlertTriangle, Merge,
-    Gift, Mail, Grid, Video, Layout, History, Link as IconLink, Monitor, Clock, Banknote, ShoppingBag, Ban
+    Gift, Mail, Grid, Video, Layout, History, Link as IconLink, Monitor, Clock, Banknote, ShoppingBag, Ban,
+    Wallet, PackageCheck, RotateCcw, PlusCircle, CalendarClock, Ticket, Phone, Wifi, Usb, Database, ShieldAlert
 } from 'lucide-react';
 import { USER_GUIDE_MANIFEST } from './data/userGuide';
 
@@ -20,7 +21,7 @@ const ICON_MAP = {
     Coins, Building, CreditCard, ShieldCheck, List, FileText, Unlock, TrendingUp, DollarSign,
     TrendingDown, Barcode, User, ArrowUpDown, RefreshCcw, Briefcase, Undo, CheckCircle, AlertTriangle,
     Merge, Gift, Star, Calendar, Mail, Grid, Video, Layout, History, IconLink, Monitor, Clock, Banknote,
-    ShoppingBag, Ban
+    ShoppingBag, Ban, Wallet, PackageCheck, RotateCcw, PlusCircle, CalendarClock, Search, Ticket, Phone, Wifi, Usb, Database, ShieldAlert
 };
 
 // Rendu dynamique du texte avec support multi-images, alertes, boutons, permissions et structuration (Titres/Sous-titres)

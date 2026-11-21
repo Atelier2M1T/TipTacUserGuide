@@ -134,6 +134,7 @@ export default {
                 — [ICON: Box | 14 | text-amber-700] [LINK: CATALOGUE_PIM | Catalogue Articles & Variantes] : Fiches produits, matrice de déclinaisons et importations.
                 — [ICON: Truck | 14 | text-blue-700] [LINK: ACHATS_FOURNISSEURS | Achats, Fournisseurs & Réceptions] : Commandes d'approvisionnement et franco de port.
                 — [ICON: ClipboardList | 14 | text-sky-600] [LINK: LOGISTIQUE_STOCKS | Logistique, Inventaires & Démarque] : Audit des pertes, transferts réseau et registre des mouvements.
+                — [ICON: Wallet | 14 | text-teal-700] [LINK: ANALYTICS_REPORTING#suivi-devis-commandes-acomptes | Devis, Commandes & Acomptes] : Suivi consolidé ou par magasin des encours d'acomptes (419110), soldes à encaisser et réservations de stock.
                 — [ICON: Globe | 14 | text-[#1e4e58]] [LINK: WEBSETTINGS_MANAGER | Boutique en Ligne & Site Web] : Personnalisation de votre vitrine E-commerce et pages CMS.
                 — [ICON: ShoppingBag | 14 | text-red-700] [LINK: ANALYTICS_REPORTING#audit-lignes-paniers-antifraude | Audit & Sécurité] : Surveillance des retouches de paniers et alertes anti-fraude.
                 `

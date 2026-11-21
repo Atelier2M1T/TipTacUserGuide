@@ -89,6 +89,7 @@ export default {
                 — Performances commerciales : [KEY: CA HT], tendance face à l'année précédente [KEY: Évol. (N-1)], [KEY: Marge €], [KEY: CA TTC], [KEY: Tickets] émis et montant du [KEY: Panier M.].
                 — Ventilation stricte des paiements : montants perçus en [KEY: CB], [KEY: Espèces], [KEY: Chèques], [KEY: Avoirs], [KEY: Cartes Cadeaux] et déduction des cagnottes de [KEY: Fidélité].
                 — Flux Web : si votre module e-commerce est actif, une colonne supplémentaire isole les encaissements dématérialisés perçus en ligne.
+                [TIP]Traitement comptable des acomptes et indemnités : Le [KEY: CA HT] et la [KEY: Marge €] reflètent l'activité commerciale réelle hors flux d'avances clients ([KEY: 419110]) et hors indemnités de dédit ([KEY: 758000]), tandis que le [KEY: CA TTC] et les colonnes de ventilation des règlements retracent fidèlement les flux financiers réellement encaissés ou remboursés à chaque étape (acompte versé, acompte complémentaire, remboursement ou solde final).
                 
                 [📸 analytics_modal_import_historique_n1.jpg | right | md]
                 [T]Import de l'historique de votre ancien logiciel et simulateur de TVA
@@ -470,6 +471,37 @@ export default {
                 — [BTN: Voir la séquence globale] : Ouvre la boîte noire séquentielle d'une session pour retracer seconde par seconde le fil exact des actions de caisse (ajouts, modifications de quantités/prix, ouvertures de paiement, annulations) avec les vrais montants nets remisés et le détail des règlements de la vente finalisée.
                 — [BTN: Voir X article(s) effacé(s)] : Pour les événements de vidage complet de panier, permet de consulter le contenu exact des articles détruits et le motif d'annulation saisi par le caissier.
                 — Filtre [BTN: Suspicions Fortes] : Isole en un clic uniquement les sessions et événements classés en Risque Élevé (Rouge).
+                `
+        },
+        {
+            id: "suivi-devis-commandes-acomptes",
+            title: "16. Suivi des Devis, Commandes Clients, Acomptes (419110) et Réservations de Stock",
+            content:
+                `
+                Le rapport « Devis & Acomptes » centralise l'intégralité de vos devis enregistrés, commandes en cours, versements d'acomptes et réservations de stock associées. Disponible en toute autonomie sur votre caisse dès le [PLAN: Plan Starter] ainsi que sur votre espace TipTac Cloud (en vue globale multi-sites ou par établissement), il assure le suivi quotidien du passif client et des retraits à venir.
+
+                [T]Les 4 indicateurs clés de pilotage (KPIs)
+                En haut d'écran, quatre cartes synthétisent la situation des dossiers ouverts sur la période sélectionnée :
+                — [KEY: Commandes en cours] : Volume total de dossiers engagés avec acompte en attente de retrait final.
+                — [KEY: Acomptes détenus (419110)] : Cumul des sommes déjà encaissées auprès des clients au titre d'avances comptables en attente de facturation définitive.
+                — [KEY: Solde restant à encaisser] : Montant global restant dû par vos clients lors du retrait définitif de leurs commandes.
+                — [KEY: Réservations stock actives] : Nombre de dossiers immobilisant actuellement des articles en stock physique (ces quantités restent retirées de la vente libre sur votre site e-commerce).
+
+                [T]Filtrage par statut, recherche multicritères et alertes d'échéance
+                Retrouvez instantanément n'importe quel dossier grâce aux contrôles du tableau de bord :
+                — [ST][ICON: Layers | 14 | text-teal-600] Onglets de statuts avec compteurs en direct :
+                Basculez entre [BTN: Tous], [BTN: Commandes], [BTN: Devis], [BTN: Soldées], [BTN: Remboursées], [BTN: Abandons] et [BTN: Annulés].
+                — [ST][ICON: Search | 14 | text-teal-600] Recherche transversale instantanée :
+                Filtrez à la frappe par numéro de document ([KEY: DEV-...]), nom du client, vendeur ou même d'après le libellé d'un article contenu à l'intérieur du devis.
+                — [ST][ICON: CalendarClock | 14 | text-teal-600] Repères visuels de validité et de stock :
+                Les dossiers bloquant de la marchandise portent le badge [KEY: Stock réservé]. Si une commande en cours dépasse sa date limite de retrait, une alerte rouge [KEY: Expiré] signale immédiatement l'échéance franchie afin de vous permettre de relancer le client ou de régulariser le dossier.
+
+                [T]Consultation détaillée, tickets liés et exports normés
+                Chaque ligne du registre met à disposition deux actions directes :
+                — [ST][ICON: Eye | 14 | text-teal-600] Fenêtre d'inspection complète :
+                Affiche la synthèse financière du dossier (Total devis, Acompte versé, Solde dû), l'éventuel motif de clôture (remboursement ou abandon), le tableau des articles avec les quantités commandées et réservées, ainsi que l'historique chronologique de tous les mouvements financiers ([KEY: Acompte], [KEY: Reprise sur solde], [KEY: Remboursement], [KEY: Abandon conservé]). Un clic sur le bouton [BTN: Ticket #...] présent sur chaque mouvement ouvre directement la copie certifiée du justificatif émis au comptoir.
+                — [ST][ICON: Printer | 14 | text-indigo-600] Réimpression directe et sorties documentaires :
+                Le raccourci imprimante permet de visualiser ou de réimprimer le devis A4 à la volée, tandis que la barre supérieure met à disposition les boutons [BTN: Export CSV] et [BTN: Imprimer / PDF] (avec mise en page automatique au format A4 Paysage et en-tête conforme NF525).
                 `
         }
     ]

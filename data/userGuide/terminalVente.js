@@ -134,6 +134,16 @@ export default {
                 [T]Identification rapide au comptoir 
                 Retrouvez un profil en tapant quelques lettres de son nom, son numéro de téléphone ou en scannant directement sa carte de fidélité avec la douchette. Si le code scanné n'existe pas encore dans votre base, le logiciel vous propose automatiquement d'ouvrir la création de fiche en y pré-remplissant le numéro de carte. 
                 [📸 caisse_recherche_client.jpg]
+                [T]Bascule progressive d'un client issu d'une migration
+                Si votre magasin a chargé l'historique d'un ancien logiciel de caisse dans le [LINK: CLIENTS_CRM#migration-base-pos | Sas de Migration Base POS], la validation des fiches s'effectue progressivement au fil des passages en caisse :
+                — [ST][ICON: Barcode | 14 | text-teal-600] Au scan de l'ancienne carte ou par recherche nominative :
+                Lorsque le caissier scanne l'ancienne carte de fidélité (ou saisit son numéro via [BTN: Saisie Code]), TipTac détecte automatiquement la fiche en attente et ouvre le formulaire client pré-rempli avec ses coordonnées et son solde de points. Si le client a oublié sa carte, son nom apparaît également dans la recherche rapide avec un badge orange [KEY: À migrer].
+                — [ST][ICON: AlertTriangle | 14 | text-orange-600] Surbrillance immédiate des champs à compléter :
+                Pour garantir la qualité de votre fichier client, toutes les informations obligatoires manquantes ou mal formatées (date de naissance, civilité, code postal/ville ou moyen de contact) sont immédiatement encadrées en rouge dès l'ouverture de la fiche. Le vendeur les complète en quelques secondes avec le client avant d'enregistrer.
+                — [ST][ICON: Merge | 14 | text-amber-700] Détection et rattachement des doublons existants :
+                Si le client possède déjà un compte actif dans TipTac (par exemple créé sans carte physique dans un autre magasin du réseau), un bandeau d'alerte orange s'affiche en haut du formulaire. Le caissier doit obligatoirement trancher avant de valider :
+                  1. Cliquer sur [BTN: Rattacher] pour fusionner les points de fidélité sur le compte TipTac existant, compléter automatiquement ses champs vides et lui associer le code-barres de sa carte physique.
+                  2. Cliquer sur [BTN: Ignorer (Créer un compte séparé)] uniquement s'il s'agit d'un homonyme distinct.
                 [T]Détective de complétude CRM en direct 
                 Pour fiabiliser votre fichier marketing, le bandeau supérieur de caisse analyse en temps réel les informations renseignées sur le client : 
                 [WARNING]Bandeau rouge clignotant : Alerte critique signalant qu'aucun canal de contact n'est renseigné (« Demander : Téléphone ou Email »). Cela incite le caissier à collecter l'information avant le règlement. 
@@ -149,7 +159,7 @@ export default {
                 [T]Suivi dynamique de la cagnotte fidélité 
                 Dès qu'un client est rattaché, son solde de points s'affiche dans le bandeau. 
                 [T]Verrouillage de sécurité NF525 
-                Lorsqu'une commande Web (Click & Collect) ou une ligne de retour d'article est injectée dans le panier, le client rattaché est scellé par un cadenas bleu. Il est strictement impossible de dissocier ou de changer de client pour éviter toute falsification de flux comptable. Pour changer de titulaire, vous devez obligatoirement annuler ou vider l'opération en cours. 
+                Lorsqu'une commande Web (Click & Collect), une ligne de retour d'article ou un devis / commande avec acompte en cours de reprise est injecté dans le panier, le client rattaché est scellé par un cadenas bleu. Lors de la reprise d'un devis ou d'une commande, le bouton de mode [BTN: Devis] du cockpit est également verrouillé. Il est strictement impossible de dissocier ou de changer de client pour éviter toute falsification de flux comptable. Pour changer de titulaire, vous devez obligatoirement annuler ou vider l'opération en cours. 
                 [📸 caisse_panier_commande_web_verrouillee.jpg]
             `
         },
@@ -210,13 +220,28 @@ export default {
         },
         {
             id: "devis-cartes-cadeaux-documents",
-            title: "6. Devis, cartes cadeaux, finalisation et envoi par e-mail",
+            title: "6. Devis, commandes avec acompte, cartes cadeaux et envoi par e-mail",
             content:
             `
-                Le terminal prend en charge l'ensemble des documents de l'activité commerciale, de l'offre préalable jusqu'à la facturation omnicanale. 
+                Le terminal prend en charge l'ensemble des documents de l'activité commerciale, de l'offre préalable et de la réservation avec acompte jusqu'à la facturation omnicanale. 
                 [T]Conception et édition de Devis A4 
-                Vous pouvez à tout instant basculer la caisse en mode « Devis ». Le système attribue un numéro séquentiel unique et édite un document A4 normé reprenant les coordonnées de l'établissement, les données du client, le détail tarifaire complet, le tableau de TVA, la date d'échéance de validité (ex : 30 jours) et un encadré officiel avec la mention « Bon pour accord » destiné à la signature du client. Ce devis est conservé dans votre historique et peut être rechargé dans le panier de caisse d'un simple clic dès que le client vient le valider au comptoir. 
+                Vous pouvez à tout instant basculer la caisse en mode « Devis » en appuyant sur le bouton [BTN: Devis] du cockpit. La zone de validation se scinde alors en deux actions distinctes :
+                — [BTN: DEVIS (Direct)] : Enregistre immédiatement le panier en tant que devis ([KEY: DEV-xxx], statut [KEY: Devis]) sans aucun encaissement. Le système attribue un numéro séquentiel unique et édite un document A4 normé reprenant les coordonnées de l'établissement, les données du client, le détail tarifaire complet, le tableau de TVA, la date d'échéance de validité (ex : 30 jours) et un encadré officiel avec la mention « Bon pour accord » destiné à la signature du client. Ce devis est conservé dans votre historique et peut être rechargé dans le panier de caisse d'un simple clic dès que le client vient le valider au comptoir. 
+                — [BTN: ACOMPTE (Commande / Résa)] : Ouvre l'assistant de prise d'acompte pour transformer le panier en commande client ferme avec suivi financier.
                 [📸 caisse_mode_devis.jpg]
+                [T]Prise d'acompte, transformation en commande et réservation de stock
+                La prise d'acompte permet de formaliser une commande client ([KEY: CMD-xxx], statut [KEY: Commande en cours]) tout en garantissant une comptabilité conforme dès le premier euro perçu :
+                [ST][ICON: User | 14 | text-teal-600] Identification client obligatoire :
+                L'enregistrement d'une commande avec acompte exige qu'un client soit préalablement associé au panier afin de garantir la traçabilité nominative du solde restant dû.
+                [ST][ICON: Wallet | 14 | text-teal-600] Choix du montant dans la modale « Encaisser un acompte » :
+                Utilisez les boutons de pourcentages rapides ([BTN: 10%], [BTN: 20%], [BTN: 30%], [BTN: 50%]) ou saisissez librement un montant en euros (la zone de saisie est pré-remplie automatiquement si un taux d'acompte par défaut a été paramétré dans les réglages du magasin). L'écran calcule et affiche en direct le [KEY: Reste à payer au retrait].
+                [ST][ICON: Shield | 14 | text-teal-600] Ventilation fiscale multi-TVA et Facture d'acompte (Compte 419110) :
+                Conformément à l'article 269 du Code Général des Impôts, TipTac ventile automatiquement l'acompte encaissé au prorata exact de chaque taux de TVA présent dans la commande (ex : articles à 20 % et végétaux à 10 %) sur le compte comptable [KEY: 419110]. L'encaissement génère une [KEY: Facture d'acompte] certifiée (ticket thermique, document A4 ou envoi dématérialisé par e-mail), sans octroyer de points de fidélité prématurément : les points de la commande seront calculés et crédités lors du règlement de la facture finale de solde.
+                [ST][ICON: PackageCheck | 14 | text-teal-600] Réservation de stock et date limite de retrait :
+                Activez l'interrupteur [BTN: Réserver le stock en magasin] pour bloquer physiquement les articles disponibles. TipTac distingue automatiquement les articles en stock mis de côté (qui sont immédiatement déduits des quantités disponibles sur votre boutique e-commerce) des articles hors stock marqués « sur commande ». Vous pouvez également fixer une [KEY: Date limite de retrait] optionnelle (ou conserver la durée suggérée par défaut).
+                [ST][ICON: CheckCircle | 14 | text-teal-600] Reprise en caisse pour encaissement du solde :
+                Lors du passage du client au comptoir pour retirer sa commande, la reprise depuis l'historique recharge le panier initial de façon verrouillée : les articles, quantités, prix et remises restent figés afin de préserver l'intégrité de la reprise de TVA par taux. TipTac injecte automatiquement les lignes de déduction négatives [KEY: Déduction acompte versé] ([KEY: 419110]) et ne soumet à l'encaissement que le solde restant dû. Le règlement final édite une [KEY: Facture de solde], libère la réservation et décrémente définitivement le stock physique.
+                [WARNING]Verrouillage d'intégrité lors du solde : Pendant la reprise d'un devis ou d'une commande en caisse, il est impossible de modifier les lignes, de changer de client ou de basculer à nouveau en mode Devis. Pour réajuster le contenu d'une commande non soldée, videz le panier en cours.
                 [T]Vente et activation de Cartes Cadeaux 
                 L'encaissement d'une ligne d'article de type « Carte Cadeau » déclenche automatiquement l'impression d'un bon thermique sécurisé. Ce titre cadeau comporte son montant facial, la date limite d'utilisation et un code-barres scannable au format CODE128 reconnu par tous les postes de votre enseigne. 
                 [📸 caisse_ticket_carte_cadeau.jpg]
@@ -291,8 +316,21 @@ export default {
                 [📸 caisse_retour_articles_historique.jpg]
                 [T]Réimpressions certifiées et duplicatas 
                 Vous pouvez réimprimer à tout moment un ticket thermique ou une facture officielle. Conformément aux dispositions de l'administration fiscale, chaque retirage comporte la mention indélébile « Duplicata », la signature cryptographique NF525 et l'horodatage certifié de la réimpression. 
-                [WARNING]Correction sécurisée de moyen de paiement 
-                Si un caissier encaisse par inadvertance un ticket en « Espèces » au lieu de « Carte Bancaire », un manager peut procéder à une rectification sur les ventes du jour (tant que la clôture journalière Z n'est pas encore passée). [PERM: Manager] La réglementation NF525 interdisant formellement la modification d'un ticket déjà émis, TipTac orchestre la correction en deux temps : il génère automatiquement un ticket d'annulation miroir portant la mention « [ANNUL. PAIEMENT] », puis édite une nouvelle transaction intégrant le moyen de règlement rectifié. La traçabilité de votre journal comptable reste ainsi juridiquement irréprochable. 
+                [T]Onglet « Devis & Commandes » : Acomptes complémentaires, solde et annulation
+                Depuis le Centre de Contrôle ([BTN: Ventes] > onglet [BTN: Devis & Commandes]), pilotez l'ensemble des devis et commandes en cours :
+                — Filtres rapides par statut : isolez en un clic les dossiers ([BTN: Tous], [BTN: En cours], [BTN: Devis], [BTN: Commandes], [BTN: Soldées] et [BTN: Annulées / Abandon]).
+                — Encart de suivi et traçabilité : visualisez le [KEY: Total document], les [KEY: Acomptes versés], le [KEY: Reste à payer], la date d'échéance éventuelle ainsi que l'historique chronologique complet des mouvements financiers d'acomptes.
+                — Actions sur un dossier ouvert :
+                  • [BTN: ENCAISSER EN CAISSE] / [BTN: SOLDER EN CAISSE] : recharge le devis ou la commande dans le panier de vente avec déduction automatique des acomptes déjà versés.
+                  • [BTN: + ACOMPTE] : encaisse un acompte complémentaire sur un devis ou une commande existante avant le retrait final.
+                  • [BTN: Réserver le stock] / [BTN: Stock réservé (cliquer pour libérer)] : active ou libère à tout moment la mise de côté des articles disponibles en magasin.
+                  • [BTN: Annuler le devis] (pour un devis sans acompte) ou [BTN: Annuler / Abandon client] (pour une commande comportant un acompte versé).
+                [ST][ICON: RotateCcw | 14 | text-rose-600] 1. Rembourser le client (« Annulée (remboursée) ») :
+                Restitue au client l'intégralité des sommes versées par [BTN: Avoir client], [BTN: Carte Bancaire], [BTN: Espèces] ou [BTN: Chèque], émet un [KEY: Avoir d'acompte] certifié, annule la TVA initialement collectée (compte [KEY: 419110]) et remet automatiquement en stock les articles qui étaient réservés. Si l'acompte avait été réglé en tout ou partie par un moyen non remboursable en numéraire (avoir, bon d'achat, fidélité, Titre-Restaurant ou Chèque Vacances ANCV), le système verrouille automatiquement le remboursement sur [BTN: Avoir client].
+                [ST][ICON: AlertTriangle | 14 | text-amber-600] 2. Abandon client — conserver l'acompte (« Abandonnée (acompte conservé) ») :
+                En cas de désistement définitif du client, aucune somme ne sort de la caisse. TipTac émet un [KEY: Justificatif d'abandon] à [KEY: 0,00 € TTC] qui solde l'avance client ([KEY: 419110]), reverse la TVA collectée initialement sur l'acompte et constate une indemnité de dédit hors champ de TVA (compte [KEY: 758000] à 0 % de TVA), tout en libérant le stock réservé.
+                [WARNING]Correction sécurisée de moyen de paiement et tickets d'acomptes
+                Si un caissier encaisse par inadvertance un ticket en « Espèces » au lieu de « Carte Bancaire », un manager peut procéder à une rectification sur les ventes du jour (tant que la clôture journalière Z n'est pas encore passée). [PERM: Manager] La réglementation NF525 interdisant formellement la modification d'un ticket déjà émis, TipTac orchestre la correction en deux temps : il génère automatiquement un ticket d'annulation miroir portant la mention « [ANNUL. PAIEMENT] », puis édite une nouvelle transaction intégrant le moyen de règlement rectifié. La traçabilité de votre journal comptable reste ainsi juridiquement irréprochable. Pour préserver l'intégrité comptable des commandes, les tickets liés au cycle de vie d'un acompte ([KEY: Facture d'acompte], [KEY: Facture de solde], [KEY: Avoir d'acompte] et [KEY: Abandon acompte]) sont verrouillés contre la modification a posteriori du moyen de paiement ; les tickets financiers purs d'acompte, d'annulation ou d'abandon d'acompte sont également exclus du retour unitaire depuis l'onglet des ventes (sur une facture de solde, seuls les articles physiques restent retournables).
                 [📸 caisse_annulation_correction_paiement.jpg]
                 `
         },

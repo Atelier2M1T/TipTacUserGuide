@@ -24,10 +24,11 @@ export default {
                 [ST][ICON: TrendingUp | 14 | text-teal-600] 1. Journal des Ventes (Code Journal VT) :
                 Génère le fichier détaillé de vos recettes jour par jour, ventilé par compte officiel du Plan Comptable Général :
                 — Recettes HT : comptes [KEY: 707000] (Marchandises), [KEY: 701000] (Produits finis) et [KEY: 706000] (Prestations de services).
-                — Acomptes & Titres cadeaux : compte [KEY: 419100] (Émission et encaissement de cartes cadeaux ou avoirs).
+                — Acomptes clients sur commandes : compte [KEY: 419110] (crédité lors de l'encaissement de l'acompte avec collecte immédiate de la TVA par taux selon l'art. 269 du CGI, puis débité lors de la reprise sur la facture de solde, d'un remboursement ou d'un abandon).
+                — Avoirs & Cartes cadeaux : comptes [KEY: 419100] (avoirs et émissions/remboursements de cartes cadeaux) et [KEY: 488700] (cartes cadeaux utilisées en paiement).
                 — TVA Collectée : sous-comptes spécifiques selon le taux légal : [KEY: 445712] (TVA 20 %), [KEY: 445711] (TVA 10 %), [KEY: 445715] (TVA 5,5 %) et [KEY: 445718] (TVA 2,1 %).
                 — Contreparties d'encaissements : comptes [KEY: 512000] (CB), [KEY: 531000] (Caisse Espèces), [KEY: 511200] (Remise Chèques) et [KEY: 512001] (Ventes Web).
-                — Régularisation des centimes d'arrondis : le système équilibre au centime près chaque journée en imputant automatiquement les écarts d'arrondis monétaires sur les comptes de charges diverses [KEY: 658000] ou de produits divers [KEY: 758000].
+                — Indemnités et régularisation des arrondis : les acomptes conservés suite à un abandon client (indemnité de dédit hors champ de TVA à 0 %) ainsi que les produits divers sont comptabilisés en [KEY: 758000] ; le système équilibre en outre chaque journée au centime près en imputant automatiquement les écarts d'arrondis monétaires sur les comptes [KEY: 658000] ou [KEY: 758000].
                 
                 [ST][ICON: DollarSign | 14 | text-teal-600] 2. Journal de Caisse (Code Journal OD) :
                 Historique chronologique de l'ensemble des flux du tiroir non issus des ventes directes : apports de monnaie, achats de fournitures immédiates, prélèvements gérance et surtout l'ensemble des dépôts d'espèces envoyés en banque lors des fins de service.

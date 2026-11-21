@@ -276,6 +276,51 @@ export default {
                 [T]Sauvegarde et Exportation complète vers Excel
                 Depuis le module de données, vous pouvez télécharger une extraction complète de votre annuaire au format tableur comprenant l'intégralité des attributs (coordonnées, soldes de fidélité, opt-in marketing et dates de naissance) pour réaliser des analyses ou des sauvegardes d'entreprise.
                 `
+        },
+        {
+            id: "migration-base-pos",
+            title: "8. Migration depuis un ancien logiciel : Sas local et bascule progressive",
+            // 📸 crm_migration_sas_bandeau.jpg : Bandeau supérieur du Sas de Migration affichant les compteurs en temps réel (En attente, Migrés, Fusionnés) et les boutons de purge.
+            // 📸 crm_migration_etape1_jointure.jpg : Étape 1 de chargement multi-fichiers Excel/CSV avec configuration de la clé de jointure entre la table des cartes et la table des points.
+            // 📸 crm_migration_etape2_filtrage.jpg : Étape 2 permettant d'exclure les cartes désactivées et d'associer les colonnes utiles vers la table tampon TipTac.
+            // 📸 crm_migration_etape3_preformatage.jpg : Étape 3 avec les options de nettoyage automatique, les filtres d'aperçu et le bouton d'injection dans le sas.
+            content:
+                `
+                Lors d'un changement de logiciel de caisse (Euresto, Clyo, Zelty, RoverCash...), la reprise brute de dizaines de milliers d'anciennes fiches souvent incomplètes ou inactives risque de polluer votre annuaire actif et votre réseau Cloud.
+                Le module [BTN: Migration Base POS] (menu Clients) propose un **sas tampon strictement local** permettant de préparer les données en amont, puis de ne basculer dans TipTac que les clients qui se présentent réellement en magasin.
+
+                [📸 crm_migration_sas_bandeau.jpg | lg]
+                [T]Tableau de bord du Sas de Migration Local
+                En haut de l'écran, trois compteurs suivent l'avancement de la bascule en direct :
+                — [KEY: En attente] : Nombre de fiches importées dans le sas et prêtes à être reconnues en caisse.
+                — [KEY: Migrés] : Fiches déjà vérifiées, complétées et transférées vers l'annuaire actif TipTac.
+                — [KEY: Fusionnés] : Fiches rattachées à un compte client TipTac qui existait déjà (notamment sur un autre magasin de l'enseigne).
+                Une fois la période de transition achevée, les boutons [BTN: Purger traités] et [BTN: Vider le sas] permettent de nettoyer définitivement la table temporaire.
+
+                [📸 crm_migration_etape1_jointure.jpg | right | md]
+                [T]Étape 1 : Chargement multi-fichiers et jointure intelligente
+                Indiquez le nom du logiciel source (ex : [KEY: EURESTO]) et sélectionnez un ou plusieurs exports tableurs ([KEY: .xlsx], [KEY: .xls], [KEY: .csv]) :
+                — [ST][ICON: List | 14 | text-teal-600] Gestion des colonnes homonymes : Si un export contient plusieurs colonnes portant le même nom (ex : plusieurs colonnes « Adresse »), l'assistant les numérote automatiquement pour préserver les compléments d'adresse.
+                — [ST][ICON: RefreshCcw | 14 | text-teal-600] Liaison multi-tables : Si l'ancien logiciel sépare l'identité des clients et leur solde de points dans deux fichiers distincts, désignez simplement la colonne commune (ex : Numéro de carte). L'assistant nettoie les espaces ou sauts de ligne parasites et affiche en direct le nombre de lignes reliées.
+                [CLEAR]
+
+                [📸 crm_migration_etape2_filtrage.jpg | left | md]
+                [T]Étape 2 : Exclusion des cartes inactives et mapping
+                Avant l'import, un filtre d'exclusion écarte automatiquement les fiches obsolètes :
+                — Désignez la colonne de statut actif (conservation uniquement si valeur active) et/ou la colonne de date de désactivation (exclusion si renseignée). Le compteur affiche immédiatement le volume de cartes inactives écartées.
+                — Associez ensuite uniquement les colonnes utiles aux champs de la table tampon TipTac ; les colonnes techniques superflues sont ignorées.
+                [CLEAR]
+
+                [📸 crm_migration_etape3_preformatage.jpg | lg]
+                [T]Étape 3 : Pré-formatage léger, aperçu et injection
+                Activez les règles de nettoyage automatique avant de contrôler le rendu sur les filtres d'aperçu ([BTN: Toutes les lignes], [BTN: Avec points fidélité], [BTN: Noms/Prénoms découpés], [BTN: Sans carte]) :
+                — [ICON: Barcode | 14 | text-teal-600] [KEY: Nettoyage & filtrage des cartes] : Supprime les guillemets et retours à la ligne, écarte les numéros factices (suites de zéros ou identifiants internes trop courts basculés en ID externe) et récupère les numéros de carte saisis par erreur dans le champ Nom.
+                — [ICON: Users | 14 | text-teal-600] [KEY: Séparation Nom / Prénom & Civilités] : Découpe automatiquement les titulaires où nom et prénom sont collés (en respectant les prénoms composés courants), harmonise la casse et convertit les civilités ([KEY: MR] / [KEY: MME] en [KEY: M.] / [KEY: Mme]).
+                — [ICON: CheckCircle | 14 | text-teal-600] [KEY: Fusion des téléphones & Communes] : Regroupe les colonnes mobile et fixe en priorisant le numéro portable formaté par paires, conserve l'éventuel second numéro en note et normalise les codes postaux français à 5 chiffres.
+
+                Cliquez sur [BTN: Charger dans le sas de migration] pour injecter les fiches retenues. Tant qu'un client n'est pas validé au comptoir, ses données restent isolées en local et ne sont jamais synchronisées vers le Cloud.
+                [TIP]Fonctionnement au comptoir : Consultez la section [LINK: TERMINAL_VENTE#crm-fidelite-qualite | Fiche client et bascule en caisse] pour voir comment le vendeur valide ou fusionne une fiche migrée lors du passage du client.
+                `
         }
     ]
 };
