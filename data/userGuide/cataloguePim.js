@@ -403,58 +403,64 @@ export default {
         },
         {
             id: "integration-factures-bl-ia-oms",
-            title: "9. Réconciliation de factures et bons de livraison par IA (Smart Invoice OMS)",
-            // 📸 catalog_smart_invoice_upload.jpg : Écran de téléversement acceptant les factures et bons de livraison en PDF, images ou fichiers texte.
+            title: "9. Réconciliation de factures et bons de livraison (Smart Invoice OMS)",
+            // 📸 catalog_smart_invoice_upload.jpg : Écran de téléversement acceptant les tableurs (Excel/Calc/CSV) et les factures PDF/images (IA).
             // 📸 catalog_smart_invoice_etape1_tiers.jpg : Étape 1 de validation du fournisseur avec calcul automatique des frais d'approche et de transport.
-            // 📸 catalog_smart_invoice_etape2_pim.jpg : Étape 2 de création des nouveaux articles avec traduction française, marges et auto-génération des EAN.
-            // 📸 catalog_smart_invoice_etape3_revision_prix.jpg : Étape 3 de révision tarifaire montrant les hausses de prix d'achat (▲) et les propositions de nouveaux prix TTC.
-            // 📸 catalog_smart_invoice_etape4_logistique_stock.jpg : Étape 4 de contrôle logistique des quantités reçues avec validation de l'entrée en stock physique.
+            // 📸 catalog_smart_invoice_etape2_pim.jpg : Étape 2 de création des nouveaux articles avec actions en masse, rattachement manuel, pays normalisés et auto-génération des EAN.
+            // 📸 catalog_smart_invoice_etape3_revision_prix.jpg : Étape 3 de révision tarifaire montrant les hausses de prix d'achat (▲), les propositions de nouveaux prix TTC et le détachement.
+            // 📸 catalog_smart_invoice_etape4_logistique_stock.jpg : Étape 4 de contrôle logistique des quantités reçues, colisages (PCB) et entrée en stock physique (sur caisse).
             content:
                 `
-                Le composant « Smart Invoice » révolutionne le traitement des livraisons fournisseurs en automatisant le rapprochement entre vos documents administratifs (factures, bons de livraison papier ou numériques) et votre base de données locale grâce à la vision par IA.
+                Le composant « Smart Invoice » automatise le traitement des factures et bons de livraison fournisseurs en un seul flux : création des fiches manquantes, mise à jour des tarifs et (sur la caisse) entrée en stock physique tracée.
                 
-                Accessible depuis le sous-menu « Mise à jour Catalogue », ce module requiert le forfait [PLAN: CONNECT] ou supérieur.
+                Accessible depuis le sous-menu « Mise à jour Catalogue » :
+                — Le [KEY: Mode Tableur Rapide] (Excel [KEY: .xlsx], [KEY: .xls], LibreOffice Calc [KEY: .ods], [KEY: .csv]) est inclus dès le forfait [PLAN: STARTER] sur la caisse (et dès l'accès Cloud [PLAN: CONNECT]).
+                — L'[KEY: Assistant IA] (lecture OCR des PDF et photos/scans, et extraction IA par lots de tableurs complexes) requiert le forfait [PLAN: COMMERCE] ou supérieur (sur caisse et sur Cloud).
                 
                 [📸 catalog_smart_invoice_upload.jpg | lg]
-                [T]Analyse intelligente des documents
-                Déposez votre document dans la zone d'analyse :
-                — Accepte les fichiers [KEY: PDF originaux], les [KEY: Photos ou scans] de bons de livraison papier, ou les fichiers texte/CSV.
-                [WARNING] Les tableurs comme Excel [KEY: .xls], [KEY: .xlsx], OpenOffice [KEY: .odf] ne peuvent pas être traités par l'IA.
-                — L'IA déchiffre la mise en page du grossiste, identifie le tiers émetteur, extrait chaque ligne d'article avec sa référence et compare le contenu avec votre catalogue local.
+                [T]Choix du profil métier et dépôt du document
+                Avant de déposer votre fichier (glisser-déposer ou sélection) :
+                — Sélectionnez votre [KEY: Profil métier] (Jardinerie, Boulangerie, Prêt-à-porter, Épicerie, Beauté, Vape/CBD, Librairie ou Général) et, si besoin, une [KEY: Famille principale] : l'IA adapte ses règles de traduction, de format différentiant et de TVA à votre secteur.
+                — Déposez un tableur ([KEY: .xlsx], [KEY: .xls], [KEY: .ods], [KEY: .csv]) ou, avec le plan [PLAN: COMMERCE], un [KEY: PDF] ou une [KEY: photo/scan].
                 
-                [TIP] L'analyse d'un document par l'IA peut prendre de quelques secondes à plusieurs minutes en fonction du nombre de références. Il est conseillé d'analyser une page à la fois si le document comporte plus de 30 références.
+                [T]Étape 0 : Préparation des tableurs (Excel / Calc / CSV)
+                Si vous importez un tableur, un écran intermédiaire nettoie et prépare vos données :
+                — [KEY: Sélection de l'en-tête] : cliquez sur la ligne contenant les titres de colonnes si le fournisseur a placé des logos ou informations d'adresse au-dessus.
+                — [KEY: Alerte images embarquées] : si le classeur contient des images (notamment des codes-barres insérés en images flottantes), TipTac vous avertit qu'elles ne sont pas lisibles en mode tableur et vous invite à exporter en PDF pour la lecture visuelle par IA.
+                — [KEY: Mappage & Profil fournisseur] : TipTac associe automatiquement les colonnes (Réf, EAN, Désignation, Quantité, Prix HT, TVA, PCB, Origine, Passeport Phyto...) et vous permet de définir une [KEY: TVA par défaut] si elle est absente. Votre mappage est mémorisé par fournisseur pour les prochains imports.
+                — Choisissez [BTN: Importer Tableur Rapide] (traitement 100 % local, instantané et exact) ou [BTN: Extraction IA (Lots)] ([PLAN: COMMERCE]) pour traduire et restructurer des fichiers complexes par paquets de 50 lignes.
                 
-                Le workflow de réconciliation se déroule en 4 étapes fluides :
+                Le workflow de réconciliation se déroule ensuite en 4 étapes (3 sur TipTac Cloud, sans gestion de stock) avec navigation [BTN: Précédent] et barre de contrôle [KEY: Total HT calculé] :
 
                 [📸 catalog_smart_invoice_etape1_tiers.jpg | right | md]
                 [T]Étape 1 : Validation du Tiers et Frais d'approche
-                — L'IA détecte si le fournisseur existe déjà dans votre annuaire ou prépare la création d'une nouvelle fiche (nom, SIRET, code trigramme).
-                — [KEY: Frais d'Approche / Transport (%)] : Renseignez le pourcentage de frais de port facturé par le grossiste (ex : 5 %). Ce taux viendra automatiquement majorer le coût de revient de chaque article lors du calcul de votre prix de vente conseillé.
+                — Le système reconnaît le fournisseur existant ou prépare la création d'une nouvelle fiche (nom, SIRET, code trigramme).
+                — [KEY: Frais d'Approche / Transport (%)] : Renseignez le pourcentage de frais de port facturé par le grossiste (ex : 5 %). Ce taux majore automatiquement le coût de revient lors du calcul du prix de vente conseillé.
+                — Sur la caisse, vous pouvez aussi lier une [KEY: Commande fournisseur en attente] pour comparer les quantités commandées et reçues à l'étape 4.
                 [CLEAR]
                 
                 [📸 catalog_smart_invoice_etape2_pim.jpg | lg]
                 [T]Étape 2 : Création des nouveaux articles (PIM)
-                Pour chaque référence inconnue en magasin, l'IA pré-remplit une fiche catalogue complète :
-                — Traduit les libellés abrégés ou en langue étrangère en désignations commerciales claires.
-                — Suggère le rayon et la catégorie correspondants.
-                — Calcule automatiquement un prix de vente TTC psychologique (terminaison en .95 € ou .90 €) basé sur la marge cible de la catégorie.
-                — Extrait les contenances, unités, poids et le code douanier.
-                — Cochez [KEY: Auto-générer les EAN manquants] pour doter instantanément chaque nouveau produit d'un code-barres scannable en caisse (requière d'avoir défini préalablement le préfixe EAN de l'établissement).
+                Pour chaque référence absente de votre catalogue :
+                — Utilisez la [KEY: barre d'actions en masse] pour appliquer d'un clic Famille, Catégorie, TVA, Coefficient de marge, ou cliquer sur [BTN: + Format au libellé] afin d'ajouter le diamètre/contenance (ex : Ø10, C23) à la désignation.
+                — Les pays d'origine sont automatiquement normalisés en français selon la liste officielle TipTac.
+                — Cliquez sur [BTN: Rattacher] sur une ligne si l'article existe déjà sous un autre nom dans votre catalogue afin d'éviter un doublon.
+                — Cochez [KEY: Auto-générer les EAN manquants] pour doter chaque nouveau produit d'un code-barres scannable en caisse.
                 
                 [📸 catalog_smart_invoice_etape3_revision_prix.jpg | left | md]
                 [T]Étape 3 : Révision tarifaire des articles existants
-                Sur les produits déjà référencés dans votre magasin, le système repère les variations de tarif d'achat HT :
-                — Met en évidence les hausses de tarif avec un badge rouge [KEY: ▲] et les baisses avec un badge vert [KEY: ▼].
-                — Calcule automatiquement un nouveau prix de vente TTC pour maintenir votre coefficient de marge commerciale.
-                — Cochez ou décochez les lignes à appliquer : les nouveaux tarifs écrasent l'ancien prix et sont consignés dans la file d'attente d'impression des étiquettes de linéaire.
+                Sur les produits reconnus, le système repère les variations de tarif d'achat HT :
+                — Met en évidence les hausses avec un badge rouge [KEY: ▲] et les baisses avec un badge vert [KEY: ▼].
+                — Calcule automatiquement un nouveau prix de vente TTC pour maintenir votre marge commerciale.
+                — En cas de faux positif de rapprochement, cliquez sur [BTN: Détacher] pour renvoyer la ligne à l'étape 2 et créer une nouvelle fiche.
                 [CLEAR]
                 
                 [📸 catalog_smart_invoice_etape4_logistique_stock.jpg | right | md]
-                [T]Étape 4 : Contrôle logistique et entrée en stock
+                [T]Étape 4 : Contrôle logistique et entrée en stock (Caisse uniquement)
                 La dernière étape récapitule les volumes physiques reçus :
-                — Ajustez les quantités réelles en cas de litige ou de colis manquant.
-                — Cliquez sur [BTN: Valider l'Entrée en Stock] : TipTac incrémente instantanément le stock théorique de l'ensemble des articles en magasin.
-                — Vous pouvez également choisir [BTN: Ignorer le stock] pour mettre à jour uniquement les fiches et les prix sans modifier les stocks informatiques.
+                — Ajustez les quantités (y compris décimales au poids), le colisage [KEY: PCB] (activez [KEY: × PCB (colis)] si le fournisseur facture au colis) et l'option [KEY: Prix lu au colis].
+                — Cliquez sur [BTN: Valider l'Entrée en Stock] : TipTac enregistre un mouvement de type [KEY: RECEPTION] tracé avec votre identifiant vendeur, le nom du fournisseur et la référence du document.
+                — Vous pouvez également choisir [BTN: Ignorer le stock] pour mettre à jour uniquement les fiches et les prix.
                 [CLEAR]
                 `
         },
