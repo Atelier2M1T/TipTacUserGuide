@@ -10,31 +10,73 @@ const FRENCH_STOP_WORDS = new Set([
     'quand', 'quoi', 'donc', 'si', 'tout', 'tous', 'toutes'
 ]);
 
-const POS_SYNONYM_GROUPS = [
-    ['douchette', 'scanner', 'bip', 'bipper', 'code', 'barres', 'ean', 'lecteur'],
-    ['tpe', 'cb', 'carte', 'bancaire', 'concert', 'contact'],
-    ['z', 'cloture', 'fermeture', 'fin', 'journee', 'session'],
-    ['casse', 'demarque', 'perte', 'vol', 'perime', 'poubelle', 'ecart'],
-    ['pin', 'mdp', 'badge', 'mot', 'passe', 'manager', 'superviseur'],
-    ['avoir', 'bon', 'remboursement', 'retour', 'cadeau', 'cheque'],
-    ['reassort', 'commande', 'fournisseur', 'achat', 'franco', 'pcb', 'reception'],
-    ['devis', 'acompte', 'facture', 'b2b', 'pro', 'encours'],
-    ['fidelite', 'points', 'cagnotte', 'remise', 'promo', 'promotion', 'solde'],
-    ['imprimante', 'ticket', 'thermique', 'etiquette', 'tiroir', 'caisse'],
-    ['inventaire', 'stock', 'comptage', 'transfert', 'entree', 'sortie'],
-    ['raccourci', 'clavier', 'touche', 'pave', 'numerique'],
-    ['annuler', 'supprimer', 'effacer', 'corriger', 'modifier']
+const STEM_SUFFIXES = [
+    'issements', 'issement', 'ements', 'ement',
+    'ations', 'ation', 'ateurs', 'ateur', 'atrices', 'atrice',
+    'ables', 'able', 'ibles', 'ible', 'iques', 'ique',
+    'euses', 'euse', 'eurs', 'eur', 'aient', 'erait',
+    'ions', 'ient', 'ees', 'ee', 'es', 'er', 'ir', 're',
+    'ez', 'ai', 'as', 'is', 'it', 'e', 's', 'x'
 ];
 
-const SYNONYM_MAP = new Map();
-for (const group of POS_SYNONYM_GROUPS) {
-    for (const term of group) {
-        if (!SYNONYM_MAP.has(term)) {
-            SYNONYM_MAP.set(term, new Set());
+/**
+ * Racinisation française légère pour regrouper singulier/pluriel, participes et dérivés métier.
+ */
+export const stemFr = (word) => {
+    if (!word || word.length < 4) return word;
+
+    let stem = word;
+    for (const suffix of STEM_SUFFIXES) {
+        if (stem.endsWith(suffix) && stem.length - suffix.length >= 4) {
+            stem = stem.slice(0, -suffix.length);
+            break;
         }
-        const set = SYNONYM_MAP.get(term);
-        for (const alias of group) {
-            if (alias !== term) set.add(alias);
+    }
+
+    if (stem === 'retourn') return 'retour';
+    if (stem === 'raccourc' || stem === 'raccourci') return 'raccourc';
+    return stem;
+};
+
+// Synonymes directionnels précis (sans mots fourre-tout qui polluent les résultats)
+const RAW_SYNONYM_EXPANSIONS = {
+    remboursement: ['retour', 'avoir', 'annulation'],
+    rembourser: ['retour', 'avoir', 'annulation'],
+    retour: ['remboursement', 'avoir', 'reprise'],
+    retourner: ['retour', 'remboursement', 'avoir'],
+    avoir: ['retour', 'remboursement', 'credit'],
+    douchette: ['scanner', 'barres', 'ean', 'lecteur', 'bip'],
+    scanner: ['douchette', 'barres', 'ean', 'lecteur'],
+    tpe: ['cb', 'bancaire', 'concert'],
+    cb: ['tpe', 'bancaire', 'concert', 'carte'],
+    z: ['cloture', 'fermeture', 'session'],
+    cloture: ['z', 'fermeture', 'session'],
+    cloturer: ['z', 'fermeture', 'session'],
+    casse: ['demarque', 'perte', 'perime'],
+    demarque: ['casse', 'perte', 'vol', 'perime'],
+    pin: ['mdp', 'badge', 'passe', 'manager'],
+    mdp: ['pin', 'passe', 'badge'],
+    reassort: ['fournisseur', 'achat', 'reception', 'commande'],
+    devis: ['acompte', 'commande'],
+    acompte: ['devis', 'commande'],
+    fidelite: ['points', 'cagnotte'],
+    raccourci: ['clavier', 'touche', 'pave'],
+    imprimante: ['imprimer', 'ticket', 'thermique', 'etiquette'],
+    imprimer: ['imprimante', 'ticket', 'thermique', 'etiquette'],
+    inventaire: ['stock', 'comptage', 'transfert']
+};
+
+const SYNONYM_MAP = new Map();
+for (const [key, targets] of Object.entries(RAW_SYNONYM_EXPANSIONS)) {
+    const stemmedKey = stemFr(key);
+    if (!SYNONYM_MAP.has(stemmedKey)) {
+        SYNONYM_MAP.set(stemmedKey, new Set());
+    }
+    const set = SYNONYM_MAP.get(stemmedKey);
+    for (const target of targets) {
+        const stemmedTarget = stemFr(target);
+        if (stemmedTarget && stemmedTarget !== stemmedKey) {
+            set.add(stemmedTarget);
         }
     }
 }
@@ -75,7 +117,7 @@ const processTerm = (term) => {
     if (!term) return null;
     if (term.length < 2 && term !== 'z') return null;
     if (FRENCH_STOP_WORDS.has(term)) return null;
-    return term;
+    return stemFr(term);
 };
 
 /**
@@ -119,7 +161,6 @@ export const chunkChapterData = (chapterKey, manifest, data) => {
                     tIndex += 1;
                 } else {
                     const cleanText = stripMarkup(part);
-                    // On indexe l'introduction si elle est significative ou s'il n'y a aucun [T]
                     if (cleanText && (cleanText.length > 20 || parts.length === 1)) {
                         chunks.push({
                             id: `${chapterKey}::${articleId}::intro${partIdx}`,
@@ -198,7 +239,7 @@ export const buildOrGetSearchIndex = async (manifest, loadedModulesCacheRef = nu
         );
 
         const miniSearch = new MiniSearch({
-            fields: ['sectionTitle', 'articleTitle', 'chapterTitle', 'cleanText'],
+            fields: ['articleTitle', 'sectionTitle', 'chapterTitle', 'cleanText'],
             storeFields: [
                 'chapterKey',
                 'chapterTitle',
@@ -234,7 +275,7 @@ export const resetSearchIndexCache = () => {
 };
 
 /**
- * Construit un extrait (~maxLen caractères) centré sur les termes trouvés, avec découpage surlignable.
+ * Construit un extrait (~maxLen caractères) centré sur les termes (ou radicaux) trouvés.
  */
 export const buildSnippet = (cleanText, highlightTerms = [], maxLen = 130) => {
     if (!cleanText) return { parts: [] };
@@ -296,7 +337,6 @@ export const buildSnippet = (cleanText, highlightTerms = [], maxLen = 130) => {
         }
     }
 
-    // Fusionner les plages qui se chevauchent dans la fenêtre [sliceStart, sliceEnd]
     const visibleRanges = matchRanges
         .map(([s, e]) => [Math.max(sliceStart, s), Math.min(sliceEnd, e)])
         .filter(([s, e]) => s < e)
@@ -330,20 +370,26 @@ export const buildSnippet = (cleanText, highlightTerms = [], maxLen = 130) => {
     return { parts };
 };
 
+const getChunkTokensSet = (text) => {
+    const tokens = new Set();
+    for (const rawTok of tokenizeForIndex(text)) {
+        const stemmed = processTerm(rawTok);
+        if (stemmed) tokens.add(stemmed);
+    }
+    return tokens;
+};
+
 /**
- * Recherche plein-texte hors-ligne avec MiniSearch + synonymes métier POS.
+ * Recherche plein-texte hors-ligne avec MiniSearch, racinisation FR, synonymes directionnels et diversité par article.
  */
 export const searchGuide = async (query, manifest, loadedModulesCacheRef = null, options = {}) => {
-    const { limit = 15 } = options;
+    const { limit = 15, maxPerArticle = 2 } = options;
     const raw = String(query || '').trim();
     if (!raw || raw.length < 2) return [];
 
     const { miniSearch, chunksById } = await buildOrGetSearchIndex(manifest, loadedModulesCacheRef);
 
-    const baseTokens = tokenizeForIndex(raw)
-        .map(processTerm)
-        .filter(Boolean);
-
+    const baseTokens = Array.from(new Set(tokenizeForIndex(raw).map(processTerm).filter(Boolean)));
     if (baseTokens.length === 0) return [];
 
     const searchOptions = {
@@ -351,80 +397,114 @@ export const searchGuide = async (query, manifest, loadedModulesCacheRef = null,
         fuzzy: 0.2,
         combineWith: 'OR',
         boost: {
-            sectionTitle: 3.5,
-            articleTitle: 3.0,
+            articleTitle: 3.5,
+            sectionTitle: 3.0,
             chapterTitle: 1.5,
-            cleanText: 1.0
+            cleanText: 1.2
         }
     };
 
     const primaryResults = miniSearch.search(baseTokens.join(' '), searchOptions);
 
-    // Expansion avec synonymes métier
-    const synonymTokens = new Set(baseTokens);
-    for (const token of baseTokens) {
-        const aliases = SYNONYM_MAP.get(token);
-        if (aliases) {
-            for (const alias of aliases) synonymTokens.add(alias);
-        }
-    }
-
     const combinedById = new Map();
+    let minPrimaryScore = Infinity;
+
     for (const r of primaryResults) {
         const chunk = chunksById.get(r.id);
         if (!chunk) continue;
-        // Bonus si tous les mots de la requête apparaissent dans le chunk
-        const normDoc = normalizeFr(`${chunk.sectionTitle} ${chunk.articleTitle} ${chunk.cleanText}`);
-        const allMatch = baseTokens.every((t) => normDoc.includes(t));
-        const boostedScore = r.score * (allMatch ? 1.65 : 1.0);
-        combinedById.set(r.id, { ...r, score: boostedScore, chunk });
+
+        const artTokens = getChunkTokensSet(chunk.articleTitle);
+        const bodyTokens = getChunkTokensSet(`${chunk.sectionTitle} ${chunk.cleanText}`);
+        const allDocTokens = new Set([...artTokens, ...bodyTokens]);
+
+        let score = r.score;
+        const allMatch = baseTokens.every((t) => allDocTokens.has(t));
+        if (allMatch) score *= 1.65;
+
+        // Bonus si un mot-clé de la requête est présent à la fois dans le titre de l'article ET dans la sous-section/corps
+        const hasTitleAndBodyOverlap = baseTokens.some((t) => artTokens.has(t) && bodyTokens.has(t));
+        if (hasTitleAndBodyOverlap) score *= 1.45;
+
+        if (score < minPrimaryScore) minPrimaryScore = score;
+        combinedById.set(r.id, { score, chunk, isPrimary: true });
     }
 
-    if (synonymTokens.size > baseTokens.length) {
-        const synResults = miniSearch.search(Array.from(synonymTokens).join(' '), {
-            ...searchOptions,
-            fuzzy: 0.15
-        });
-        for (const r of synResults) {
-            if (!combinedById.has(r.id)) {
-                const chunk = chunksById.get(r.id);
-                if (chunk) {
-                    combinedById.set(r.id, { ...r, score: r.score * 0.55, chunk });
-                }
+    // Expansion synonyme directionnelle (poids réduit et plafonné sous les correspondances directes)
+    const synonymOnlyTokens = new Set();
+    for (const token of baseTokens) {
+        const aliases = SYNONYM_MAP.get(token);
+        if (aliases) {
+            for (const alias of aliases) {
+                if (!baseTokens.includes(alias)) synonymOnlyTokens.add(alias);
             }
         }
     }
 
-    const highlightTerms = Array.from(synonymTokens);
+    if (synonymOnlyTokens.size > 0) {
+        const synResults = miniSearch.search(Array.from(synonymOnlyTokens).join(' '), {
+            ...searchOptions,
+            fuzzy: 0.15
+        });
+        const synCeiling = minPrimaryScore < Infinity ? minPrimaryScore * 0.85 : Infinity;
 
-    return Array.from(combinedById.values())
-        .sort((a, b) => b.score - a.score)
-        .slice(0, limit)
-        .map(({ chunk, score }) => ({
-            id: chunk.id,
-            score,
-            chapterKey: chunk.chapterKey,
-            chapterTitle: chunk.chapterTitle,
-            articleId: chunk.articleId,
-            articleTitle: chunk.articleTitle,
-            sectionTitle: chunk.sectionTitle,
-            sectionAnchor: chunk.sectionAnchor,
-            snippet: buildSnippet(chunk.cleanText, highlightTerms, 130),
-            cleanText: chunk.cleanText
-        }));
+        for (const r of synResults) {
+            const chunk = chunksById.get(r.id);
+            if (!chunk) continue;
+            if (!combinedById.has(r.id)) {
+                const synScore = Math.min(r.score * 0.3, synCeiling);
+                combinedById.set(r.id, { score: synScore, chunk, isPrimary: false });
+            } else {
+                // Léger renfort si un résultat déjà pertinent contient aussi un synonyme
+                const existing = combinedById.get(r.id);
+                existing.score += r.score * 0.15;
+            }
+        }
+    }
+
+    const highlightTerms = [...baseTokens, ...Array.from(synonymOnlyTokens)];
+    const sorted = Array.from(combinedById.values()).sort((a, b) => b.score - a.score);
+
+    // Diversité par article : évite qu'un seul long article monopolise le top résultats
+    const perArticleCounts = new Map();
+    const diverseResults = [];
+    for (const entry of sorted) {
+        const artKey = `${entry.chunk.chapterKey}::${entry.chunk.articleId}`;
+        const count = perArticleCounts.get(artKey) || 0;
+        if (maxPerArticle > 0 && count >= maxPerArticle) continue;
+        perArticleCounts.set(artKey, count + 1);
+        diverseResults.push(entry);
+        if (diverseResults.length >= limit) break;
+    }
+
+    return diverseResults.map(({ chunk, score }) => ({
+        id: chunk.id,
+        score,
+        chapterKey: chunk.chapterKey,
+        chapterTitle: chunk.chapterTitle,
+        articleId: chunk.articleId,
+        articleTitle: chunk.articleTitle,
+        sectionTitle: chunk.sectionTitle,
+        sectionAnchor: chunk.sectionAnchor,
+        snippet: buildSnippet(chunk.cleanText, highlightTerms, 130),
+        cleanText: chunk.cleanText
+    }));
 };
 
 /**
- * Sélectionne les meilleurs extraits [T] pour le RAG léger de l'assistant IA.
+ * Sélectionne les meilleurs extraits [T] diversifiés pour le RAG léger de l'assistant IA.
  */
-export const getTopChunksForAi = async (query, manifest, loadedModulesCacheRef = null, limit = 7) => {
-    const results = await searchGuide(query, manifest, loadedModulesCacheRef, { limit });
+export const getTopChunksForAi = async (query, manifest, loadedModulesCacheRef = null, limit = 10) => {
+    const results = await searchGuide(query, manifest, loadedModulesCacheRef, {
+        limit,
+        maxPerArticle: 2
+    });
     return results.map((r) => ({
         chapterKey: r.chapterKey,
         chapterTitle: r.chapterTitle,
         articleId: String(r.articleId),
         articleTitle: r.articleTitle,
         sectionTitle: r.sectionTitle || '',
+        sectionAnchor: r.sectionAnchor || '',
         content: (r.cleanText || '').slice(0, 2800)
     }));
 };

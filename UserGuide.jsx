@@ -157,7 +157,7 @@ const FormattedGuideContent = ({ content, articleKey = null, highlightedAnchor =
                                             <img
                                                 src={imgSrc}
                                                 alt={imageName}
-                                                loading="lazy"
+                                                decoding="async"
                                                 style={{ maxHeight: maxH }}
                                                 onClick={() => onImageClick && onImageClick({ src: imgSrc, alt: imageName })}
                                                 className={`w-auto max-w-full rounded-md object-contain border border-gray-200 shadow-sm ${onImageClick ? 'cursor-zoom-in group-hover:brightness-95 transition' : ''}`}
@@ -300,10 +300,12 @@ export const UserGuide = ({
     const loadedModulesCache = useRef({});
     const articleRefs = useRef({});
     const scrollContainerRef = useRef(null);
+    const contentWrapperRef = useRef(null);
     const searchInputRef = useRef(null);
     const flyoutContainerRef = useRef(null);
     const isManualScrolling = useRef(false);
     const highlightTimerRef = useRef(null);
+    const scrollLockRef = useRef(null);
 
     const hasConnectPlan = CONNECT_PLANS.includes(String(userContext?.plan || '').toUpperCase());
 
@@ -389,8 +391,20 @@ export const UserGuide = ({
         }
     }, [activeTab]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    // Défilement précis vers l'article ou l'ancre [T] une fois le chapitre rendu
-    const triggerScrollToTarget = useCallback((articleId, sectionAnchor = null) => {
+    // Défilement stabilisé vers l'article ou l'ancre [T] (résiste aux décalages d'images)
+    const releaseScrollLock = useCallback(() => {
+        if (scrollLockRef.current) {
+            scrollLockRef.current.cleanup();
+            scrollLockRef.current = null;
+        }
+    }, []);
+
+    useEffect(() => {
+        return () => releaseScrollLock();
+    }, [releaseScrollLock]);
+
+    const triggerScrollToTarget = useCallback((articleId, sectionAnchor = null, options = {}) => {
+        const { instant = false } = options;
         const container = scrollContainerRef.current;
         if (!container) return false;
 
@@ -403,19 +417,28 @@ export const UserGuide = ({
         }
         if (!targetEl) return false;
 
+        releaseScrollLock();
         isManualScrolling.current = true;
         if (articleId !== null && articleId !== undefined) {
             setActiveArticleId(articleId);
         }
 
-        const containerTop = container.getBoundingClientRect().top;
-        const targetTop = targetEl.getBoundingClientRect().top;
-        const targetScrollPosition = container.scrollTop + (targetTop - containerTop) - 18;
+        const snapToTarget = (behavior = 'auto') => {
+            if (!scrollContainerRef.current || !targetEl.isConnected) return;
+            const cTop = scrollContainerRef.current.getBoundingClientRect().top;
+            const tTop = targetEl.getBoundingClientRect().top;
+            const nextScrollTop = scrollContainerRef.current.scrollTop + (tTop - cTop) - 18;
+            scrollContainerRef.current.scrollTo({
+                top: Math.max(0, nextScrollTop),
+                behavior
+            });
+        };
 
-        container.scrollTo({
-            top: Math.max(0, targetScrollPosition),
-            behavior: 'smooth'
-        });
+        const initialDelta = Math.abs(
+            targetEl.getBoundingClientRect().top - container.getBoundingClientRect().top - 18
+        );
+        const useInstant = instant || initialDelta > 1200;
+        snapToTarget(useInstant ? 'auto' : 'smooth');
 
         const anchorKey = sectionAnchor || (articleId !== null && articleId !== undefined ? String(articleId) : null);
         if (anchorKey) {
@@ -426,24 +449,51 @@ export const UserGuide = ({
             }, 2000);
         }
 
-        setTimeout(() => {
-            isManualScrolling.current = false;
-        }, 350);
+        // Maintient l'ancrage pendant 1500 ms si les captures chargent et modifient la hauteur au-dessus
+        const handleLayoutShift = () => {
+            snapToTarget('auto');
+        };
+        const handleUserInterrupt = () => {
+            releaseScrollLock();
+        };
+
+        let resizeObserver = null;
+        const observedNode = contentWrapperRef.current || container.firstElementChild;
+        if (typeof ResizeObserver !== 'undefined' && observedNode) {
+            resizeObserver = new ResizeObserver(handleLayoutShift);
+            resizeObserver.observe(observedNode);
+        }
+
+        container.addEventListener('load', handleLayoutShift, true);
+        container.addEventListener('wheel', handleUserInterrupt, { passive: true });
+        container.addEventListener('touchstart', handleUserInterrupt, { passive: true });
+        container.addEventListener('pointerdown', handleUserInterrupt, { passive: true });
+
+        const timerId = setTimeout(() => {
+            releaseScrollLock();
+        }, 1500);
+
+        scrollLockRef.current = {
+            cleanup: () => {
+                clearTimeout(timerId);
+                if (resizeObserver) resizeObserver.disconnect();
+                container.removeEventListener('load', handleLayoutShift, true);
+                container.removeEventListener('wheel', handleUserInterrupt);
+                container.removeEventListener('touchstart', handleUserInterrupt);
+                container.removeEventListener('pointerdown', handleUserInterrupt);
+                isManualScrolling.current = false;
+            }
+        };
 
         return true;
-    }, []);
+    }, [releaseScrollLock]);
 
     useEffect(() => {
         if (!pendingTarget || isLoading || !currentSectionData) return;
 
         const rafId = requestAnimationFrame(() => {
-            const scrolled = triggerScrollToTarget(pendingTarget.articleId, pendingTarget.sectionAnchor);
-            if (scrolled) {
-                setPendingTarget(null);
-            } else {
-                // Cible introuvable dans le chapitre chargé : on nettoie pour ne pas bloquer
-                setPendingTarget(null);
-            }
+            triggerScrollToTarget(pendingTarget.articleId, pendingTarget.sectionAnchor, { instant: true });
+            setPendingTarget(null);
         });
 
         return () => cancelAnimationFrame(rafId);
@@ -499,9 +549,14 @@ export const UserGuide = ({
         const handleNavigate = (e) => {
             const { targetId } = e.detail || {};
             if (!targetId) return;
-            const [chapter, article] = String(targetId).split('#');
+            const [chapter, article, anchor] = String(targetId).split('#');
             if (chapter && USER_GUIDE_MANIFEST[chapter]) {
-                navigateTo({ tab: chapter, articleId: article || null, recordHistory: true });
+                navigateTo({
+                    tab: chapter,
+                    articleId: article || null,
+                    sectionAnchor: anchor || null,
+                    recordHistory: true
+                });
             }
         };
 
@@ -591,7 +646,7 @@ export const UserGuide = ({
         setAiState({ loading: true, answer: null, error: null, askedQuery: question });
 
         try {
-            const chunks = await getTopChunksForAi(question, USER_GUIDE_MANIFEST, loadedModulesCache, 7);
+            const chunks = await getTopChunksForAi(question, USER_GUIDE_MANIFEST, loadedModulesCache, 10);
             if (!chunks || chunks.length === 0) {
                 setAiState({
                     loading: false,
@@ -858,10 +913,15 @@ export const UserGuide = ({
                                                                         key={lIdx}
                                                                         type="button"
                                                                         onClick={() => {
-                                                                            const [chap, art] = String(lnk.targetId || '').split('#');
+                                                                            const [chap, art, anchor] = String(lnk.targetId || '').split('#');
                                                                             if (chap && USER_GUIDE_MANIFEST[chap]) {
                                                                                 setIsFlyoutOpen(false);
-                                                                                navigateTo({ tab: chap, articleId: art || null, recordHistory: true });
+                                                                                navigateTo({
+                                                                                    tab: chap,
+                                                                                    articleId: art || null,
+                                                                                    sectionAnchor: anchor || null,
+                                                                                    recordHistory: true
+                                                                                });
                                                                             }
                                                                         }}
                                                                         className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-teal-50 hover:bg-teal-100 border border-teal-200 text-teal-800 text-[11px] font-bold transition-colors"
@@ -1084,7 +1144,7 @@ export const UserGuide = ({
                     <div
                         ref={scrollContainerRef}
                         onScroll={handleContentScroll}
-                        className="flex-1 overflow-y-auto p-4 sm:p-8 bg-white scroll-smooth"
+                        className="flex-1 overflow-y-auto p-4 sm:p-8 bg-white"
                     >
                         {isLoading ? (
                             <div className="h-full flex flex-col items-center justify-center text-gray-400 gap-3">
@@ -1092,7 +1152,7 @@ export const UserGuide = ({
                                 <span className="text-sm font-bold uppercase tracking-wider">Chargement...</span>
                             </div>
                         ) : currentSectionData?.articles ? (
-                            <div className="max-w-4xl mx-auto space-y-8">
+                            <div ref={contentWrapperRef} className="max-w-4xl mx-auto space-y-8">
                                 {/* En-tête de section */}
                                 <div className="border-b border-gray-200 pb-4 flex items-center gap-3">
                                     <div className={`p-2.5 rounded-xl bg-gray-50 border border-gray-200 ${activeManifest?.color}`}>
@@ -1134,7 +1194,7 @@ export const UserGuide = ({
                                 </div>
                             </div>
                         ) : currentSectionData?.sections ? (
-                            <div className="max-w-4xl mx-auto">
+                            <div ref={contentWrapperRef} className="max-w-4xl mx-auto">
                                 <h3 className="text-2xl font-black text-gray-900 mb-6 pb-2 border-b">{currentSectionData.title}</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     {currentSectionData.sections.map((sec, idx) => {
