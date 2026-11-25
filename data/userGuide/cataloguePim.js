@@ -535,6 +535,42 @@ export default {
                 — Si vos disposez d'un forfait [PLAN: Connect] ou supérieur, les demandes sont synchronisées en tâche de fond avec le Cloud pour permettre à la direction d'arbitrer les besoins d'assortiment de l'enseigne.
                 [CLEAR]
                 `
+        },
+        {
+            id: "migration-base-articles-pos",
+            title: "12. Migration progressive d'un ancien catalogue (Sas de Migration Articles)",
+            content:
+                `
+                Lors d'un changement de logiciel de caisse (Euresto, Clyo, Zelty, RoverCash...), importer en bloc des milliers d'anciennes références souvent obsolètes ou mal classées risque de polluer votre catalogue actif et votre synchronisation Cloud.
+                [T]Principe du sas local
+                L'assistant de migration (accessible via le menu Catalogue / Migration et en basculant le sélecteur supérieur sur [BTN: Articles]) isole vos anciens produits dans une table tampon strictement locale ([KEY: migration_tampon_articles]).
+                Tant qu'un article n'a pas été scanné ou recherché en caisse, il reste invisible dans votre catalogue actif et n'est jamais envoyé vers TipTac Cloud : seules les références réellement passées en caisse sont créées définitivement.
+
+                [T]Suivi et nettoyage du sas
+                En haut de l'écran, deux compteurs suivent l'avancement en direct :
+                — [KEY: En attente] : Nombre d'articles importés dans le sas et prêts à être reconnus au comptoir.
+                — [KEY: Migrés] : Articles déjà validés en caisse et transférés vers votre catalogue actif.
+                Une fois la période de transition terminée, les boutons [BTN: Purger traités] et [BTN: Vider le sas] permettent de nettoyer définitivement la table temporaire.
+
+                [ST]Étape 1 : Fichiers & Jointures :
+                Importez un ou plusieurs fichiers Excel/CSV ([KEY: .xlsx], [KEY: .xls], [KEY: .csv]) :
+                — Sur un export Euresto, le fichier [KEY: Produits] est automatiquement placé en base, [KEY: Tarifs] est filtrable par colonne/valeur (ex : [KEY: IDModes_Vente = 1]), et [KEY: codes_barre] agrège automatiquement les codes-barres secondaires sur chaque produit.
+                — L'assistant nettoie automatiquement les clés numériques (suppression des espaces et séparateurs de milliers) pour fiabiliser les jointures.
+                — Utilisez le bouton [BTN: ↑] sur un fichier secondaire pour le promouvoir en fichier de base si besoin.
+
+                [ST]Étape 2 : Filtrage & Mapping :
+                — Excluez automatiquement les articles non commercialisés (ex : [KEY: ALaVente = 0]).
+                — Faites correspondre les colonnes utiles de vos fichiers vers les champs de la table tampon TipTac (désignation, prix TTC, TVA, prix d'achat HT, fournisseur, référence interne, marque, éco-part, unité, poids, code botanique…).
+
+                [ST]Étape 3 : Pré-formatage & Injection :
+                Avant de injecter dans le sas, l'assistant applique des règles automatiques et affiche un aperçu :
+                — [ICON: Barcode | 14 | text-teal-600] [KEY: Normalisation des codes-barres] : Conversion automatique des GTIN-14 commençant par [KEY: 0] en EAN-13.
+                — [ICON: Percent | 14 | text-teal-600] [KEY: Décodage des codes TVA Euresto] : Conversion automatique ([KEY: 1] → 20 %, [KEY: 2] → 10 %, [KEY: 3] → 5,5 %, [KEY: 4] → 2,1 %, [KEY: 5] → 0 %).
+                — [ICON: Tag | 14 | text-teal-600] [KEY: Articles à prix libre] : Détection automatique des références à prix libre ([KEY: PrixLibre = 1] ou [KEY: -1]).
+                — [ICON: Type | 14 | text-teal-600] [KEY: Harmonisation de la casse] : Option pour uniformiser les libellés (majuscules/minuscules) avant l'aperçu final et l'injection dans le sas.
+
+                [TIP]Fonctionnement au comptoir : Consultez la section [LINK: TERMINAL_VENTE#saisie-articles-prix-libre | Validation des articles en caisse] pour voir comment le vendeur valide en un clic un article issu du sas lors du passage d'un client.
+                `
         }
     ]
 };

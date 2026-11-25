@@ -210,35 +210,38 @@ export default {
             // 📸 stocks_sortieb2b_document_a4.jpg : Aperçu du document A4 « Bon de Sortie / BL » valorisé au prix d'achat HT avec mentions d'entreprise et total.
             content:
                 `
-                Lorsque des marchandises quittent votre magasin en dehors du circuit de caisse direct (cession de stock à une entreprise partenaire, prêt de matériel à une collectivité, vente B2B en compte ou mise à disposition pour un chantier), elles doivent être sorties via le module « Sorties B2B & Externes ».
+                Lorsque des marchandises quittent votre magasin en dehors du circuit de caisse direct (cession de stock à une entreprise partenaire, prêt de matériel à une collectivité, livraison B2B à facturer ou mise à disposition pour un chantier), elles doivent être sorties via le module « Sorties B2B & Externes ».
                 
                 Accessible depuis l'univers Stocks & Logistique sur l'écran d'accueil.
                 
                 [📸 stocks_sortieb2b_historique_liste.jpg | lg]
                 [T]Historique et suivi des expéditions
-                Le premier onglet répertorie l'ensemble des cessions passées :
-                — Affiche la référence unique du bon (format [KEY: B2B-YYYYMMDD-XXXX]), le nom du destinataire, la date et l'heure d'expédition.
+                Le premier onglet répertorie l'ensemble des cessions et bons de livraison passés :
+                — Affiche la référence unique du bon (format [KEY: B2B-YYYYMMDD-XXXX]), le type d'opération ([KEY: CESSION_INTERNE] ou [KEY: BL_A_FACTURER]), le nom du destinataire, la date et l'heure d'expédition.
                 — Cliquez sur l'icône d'imprimante pour rééditer à tout moment le document officiel A4.
+                — Tant qu'un [KEY: BL_A_FACTURER] n'a pas encore été intégré dans une facture B2B émise, il peut être annulé proprement (avec restitution du stock dans le registre). Une fois facturé, il est verrouillé et se corrige uniquement par avoir.
                 — [KEY: Colis Tablettes] : Cliquez sur ce bouton pour rapatrier les sorties externes préparées sur le terrain par vos équipes sur terminal mobile.
                 
                 [📸 stocks_sortieb2b_creation_colis.jpg | lg]
-                [T]Composition d'un nouveau bon de sortie
+                [T]Composition d'un nouveau bon de sortie ou BL facturable
                 Basculez sur l'onglet [BTN: Nouvelle Sortie] :
-                1. [KEY: Destinataire (Obligatoire)] : Saisissez la raison sociale de l'entreprise cliente, du prestataire ou du partenaire récepteur.
-                2. [KEY: Ajouter des articles] : Recherchez vos produits au clavier ou scannez-les à la douchette.
-                [WARNING]Bouclier anti-dépassement : Le système contrôle votre inventaire en temps réel et bloque toute saisie supérieure au stock physique disponible en rayon pour empêcher les stocks négatifs.
-                3. [KEY: Note ou Motif] : Précisez les modalités de l'opération (ex : « Mise à disposition événementiel », « Bon de commande client pro n°458 »).
+                1. [KEY: Mode de sortie] : Choisissez entre [KEY: Cession interne] (hors facturation client) et [KEY: Bon de livraison à facturer] (rattaché à un client Pro pour intégration automatique à sa prochaine facture B2B et suivi d'encours).
+                2. [KEY: Destinataire / Client Pro (Obligatoire)] : Sélectionnez le client professionnel (en mode facturable) ou saisissez la raison sociale du partenaire récepteur.
+                3. [KEY: Ajouter des articles & lignes libres] : Recherchez vos produits au clavier ou scannez-les à la douchette, y compris avec des **quantités décimales** (ex : m², kg, litres) ou des **articles non gérés en stock / lignes libres** (forfait transport, prestation). En mode tarification [KEY: PA_HT_COEFF], des alertes signalent tout PA HT absent ou risque de revente à perte.
+                [WARNING]Bouclier anti-dépassement : Pour les articles gérés en stock, le système contrôle votre inventaire en temps réel et bloque toute saisie supérieure au stock physique disponible en rayon pour empêcher les stocks négatifs.
+                4. [KEY: Note ou Motif] : Précisez les modalités de l'opération (ex : « Mise à disposition événementiel », « Bon de commande client pro n°458 »).
                 
-                Cliquez sur [BTN: Valider la sortie] : les stocks physiques sont immédiatement décomptés et un mouvement de type [KEY: SORTIE_B2B] est inscrit dans le journal.
+                Cliquez sur [BTN: Valider la sortie] : les stocks physiques sont immédiatement décomptés et un mouvement de type [KEY: SORTIE_B2B] est inscrit dans le journal (avec contrôle du plafond d'encours client en mode [KEY: BL_A_FACTURER]).
                 
                 [📸 stocks_sortieb2b_document_a4.jpg | right | md]
                 [T]Édition du Bon de Sortie / Bon de Livraison A4
                 Dès la validation, le logiciel génère un document officiel imprimable :
                 — En-tête complet du magasin émetteur avec logo, adresse, SIRET et N° TVA.
-                — Encadré destinataire et instructions de transport.
+                — Encadré destinataire et adresse de livraison / instructions de transport.
                 — Tableau des articles : références internes, désignations et quantités précises.
-                — Valorisation comptable au coût de revient : affiche la valeur de cession au prix d'achat HT d'origine des marchandises ainsi que la valeur indicative au TTC public.
+                — Valorisation adaptée au mode : en mode [KEY: CESSION_INTERNE], le document affiche la valorisation au prix d'achat HT d'origine ; en mode [KEY: BL_A_FACTURER] destiné au client, les prix d'achat HT sont automatiquement masqués pour préserver votre confidentialité de marge.
                 — Cliquez sur [BTN: Imprimer A4] pour éditer le document destiné à accompagner la marchandise et servir de preuve de décharge.
+                [TIP]Facturation des BL : Pour convertir vos BL facturables en factures officielles, consultez [LINK: FACTURATION_B2B#b2b-bl-externes-facturables | Bons de livraison externes facturables].
                 [CLEAR]
                 `
         },

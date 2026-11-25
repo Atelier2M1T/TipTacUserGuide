@@ -71,6 +71,14 @@ export const USER_GUIDE_MANIFEST = {
         color: "text-purple-700",
         load: () => import('./userGuide/clientsCrm.js')
     },
+    FACTURATION_B2B: {
+        id: "FACTURATION_B2B",
+        title: "Facturation B2B, Encours & Factur-X",
+        category: "TipTacCaisse",
+        iconName: "Briefcase",
+        color: "text-indigo-700",
+        load: () => import('./userGuide/facturationB2B.js')
+    },
     CATALOGUE_PIM: {
         id: "CATALOGUE_PIM",
         title: "Catalogue Articles & Variantes",

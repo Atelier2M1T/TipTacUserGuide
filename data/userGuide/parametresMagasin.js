@@ -89,6 +89,14 @@ export default {
                 [📸 config_alerte_bloquante_siret.jpg | right | sm]
                 [WARNING]Barrière de sécurité légale : Si le SIRET, le nom commercial ou l'adresse du magasin ne sont pas renseignés, TipTac bloque totalement l'ouverture du Terminal Caisse et du module des Commandes Web. Un bandeau d'alerte rouge s'affiche sur l'écran d'accueil pour imposer la régularisation de vos coordonnées d'entreprise.
                 [CLEAR]
+
+                [T]Paramètres de facturation B2B (Décret 2022-1299 & Factur-X)
+                Pour assurer la validité juridique et fiscale de vos factures professionnelles ([KEY: FAC-YYYY-XXXX]) et de vos archives [KEY: Factur-X], complétez également les paramètres B2B du magasin :
+                — [KEY: Coordonnées bancaires (IBAN & BIC)] : Reportées automatiquement sur les factures B2B et les relevés de compte pour faciliter les règlements par virement.
+                — [KEY: Code Pays ISO] : Identifiant pays du vendeur (ex : [KEY: FR]) requis par la norme européenne EN 16931.
+                — [KEY: Option TVA sur les débits] : Interrupteur à activer si votre entreprise relève du régime de la TVA sur les débits (mention obligatoire du Décret 2022-1299 sur les factures).
+                — [KEY: Pénalités de retard & Indemnité 40 €] : Taux des pénalités applicables en cas de retard de paiement et mention légale de l'indemnité forfaitaire pour frais de recouvrement (40 € par facture impayée).
+                — [KEY: Conditions d'escompte & Règlement par défaut] : Libellé d'escompte en cas de paiement anticipé (ou mention « Pas d'escompte pour règlement anticipé ») et conditions par défaut appliquées aux nouveaux comptes B2B.
                 `
         },
         {

@@ -123,6 +123,15 @@ export default {
                 [📸 caisse_modification_libelle_produit.jpg| h=200]
                 Vous ajuster la quantité d'un produit au pavé en cliquant sur la cellule correspondant, modifier ou forcer son prix unitaire et appliquer de remise. Les remises manuelles et modifications de prix des articles dont le prix de vente n'est pas libre sont tracées et consultables dans l'administration. Les remises exigent une permission spécifique ou le code PIN d'un responsable.
                 [📸 caisse_modification_prix_produit.jpg, caisse_modification_quantite_produit.jpg, caisse_modification_remise.jpg | h=220]
+                [T]Bascule progressive d'un article issu d'une migration
+                Si votre magasin a chargé son ancien catalogue dans le [LINK: CATALOGUE_PIM#migration-base-articles-pos | Sas de Migration Articles], la création des fiches s'effectue progressivement au fil des passages en caisse :
+                — [ST][ICON: Barcode | 14 | text-teal-600] Au scan d'un code-barres :
+                Si le code scanné n'existe pas encore dans le catalogue actif, TipTac interroge automatiquement le sas local (codes principaux et secondaires) et affiche une confirmation avec le libellé et le prix importé (ou « Prix libre »).
+                — [ST][ICON: Search | 14 | text-amber-600] Articles sans code-barres :
+                Depuis la recherche produit en caisse ([BTN: RECHERCHER]), dès 2 caractères saisis, une section ambre dédiée remonte les articles en attente avec un badge [KEY: À migrer]. Un clic ouvre la création rapide pré-remplie.
+                — [ST][ICON: CheckCircle | 14 | text-emerald-600] Validation express en Création Rapide :
+                Le vendeur vérifie uniquement la désignation, le prix de vente TTC, la TVA et le classement Famille / Catégorie (guidé par un repère affichant l'ancien classement si renseigné). Les autres métadonnées importées (prix d'achat HT, fournisseur, référence interne, marque, éco-part, unité, poids, code botanique…) sont enregistrées silencieusement. Cliquer sur [BTN: Enregistrer & Encaisser] crée la fiche, la marque comme migrée et l'ajoute immédiatement au panier.
+                [TIP]Dédoublonnage réseau : Si l'article existe déjà dans le catalogue actif (créé localement ou synchronisé depuis un autre magasin du réseau), il passe directement au panier sans déclencher la migration.
             `
         },
         {
@@ -216,6 +225,11 @@ export default {
                 [WARNING]Procédure stricte pour les retours Web 
                 Si un client rapporte en magasin un article acheté sur votre boutique e-commerce TipTac, la caisse interdit le remboursement direct en caisse pour éviter les écarts de trésorerie bancaire. Elle clôture la reprise en stock et imprime un feuillet thermique officiel « ACTION REQUISE : REMBOURSEMENT WEB ». Le responsable du magasin doit simplement agrafer ce bon pour ordonner la rétrocession électronique du paiement en ligne (via Stripe ou Monetico) depuis le panneau d'administration. 
                 [📸 caisse_ticket_remboursement_web.jpg]
+                [T]Paiement « En Compte » (B2B) et Règlement de factures au comptoir
+                Pour les clients professionnels habilités au crédit :
+                — [BTN: En Compte] : Lorsque le client pro identifié est autorisé et non bloqué, le bouton [BTN: En Compte] enregistre la totalité du panier sur son encours client après contrôle du plafond en temps réel (pas de paiement mixte ni de points fidélité en V1 ; les retours sur tickets en compte se font exclusivement en [KEY: EN_COMPTE]). En cas de dépassement du plafond, un responsable muni de la permission [PERM: Déblocage plafond B2B] peut autoriser exceptionnellement l'opération par code PIN. La caisse imprime alors un justificatif de passage non acquitté.
+                — **Règlement d'une facture B2B émise au comptoir** ([KEY: REGLEMENT_FACTURE]) : Un client Pro peut régler en caisse (CB, espèces ou chèque) une facture [KEY: FAC-YYYY-XXXX] déjà émise. L'encaissement entre bien dans le tiroir ou le TPE du poste, mais est automatiquement exclu du Chiffre d'Affaires du jour pour éviter tout double comptage.
+                [TIP]Guide complet B2B : Retrouvez tout le détail de la facturation, du lettrage et des plafonds dans le chapitre [LINK: FACTURATION_B2B#b2b-ventes-en-compte-comptoir | Ventes En Compte & Règlements B2B].
             `
         },
         {

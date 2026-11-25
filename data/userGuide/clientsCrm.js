@@ -61,7 +61,8 @@ export default {
                 Exige la [KEY: Civilité] (M., Mme, M. & Mme), le [KEY: Nom], le [KEY: Prénom] et la [KEY: Date de naissance] (obligatoire pour identifier les homonymes et animer les offres anniversaires).
                 
                 [ST][ICON: Briefcase | 14 | text-teal-700] Mode Compte Professionnel :
-                Un encart indigo débloque les champs d'entreprise. La saisie de la [KEY: Raison Sociale] devient obligatoire. Renseignez également le [KEY: Numéro SIRET] (14 chiffres) : il sera automatiquement reporté sur les factures émises au comptoir pour garantir leur validité fiscale.
+                Un encart indigo débloque les champs d'entreprise : la [KEY: Raison Sociale] devient obligatoire et vous pouvez renseigner le [KEY: Numéro SIRET] (14 chiffres), le [KEY: SIREN] (9 chiffres), le [KEY: N° TVA Intracommunautaire], le [KEY: Code auxiliaire comptable] (ex : [KEY: 411CLIENT]), une [KEY: adresse de livraison distincte] (Décret 2022-1299) et un [KEY: e-mail de facturation].
+                Lorsque le compte est habilité pour le crédit B2B, cette fiche pilote également l'autorisation de paiement [KEY: En Compte], le [KEY: plafond d'encours], le [KEY: blocage de compte], le délai/mode d'échéance et le mode de tarification B2B ([KEY: PRIX_VENTE_REMISE] ou [KEY: PA_HT_COEFF]). Consultez [LINK: FACTURATION_B2B#b2b-comptes-pro-plafonds-tarifs | Comptes Pro, plafonds et tarification B2B].
                 
                 [📸 crm_formatage_automatique_champs.jpg | right | md]
                 [T]Formatage automatique et validation des données
@@ -97,6 +98,7 @@ export default {
                 Si un client réclame la suppression de ses données personnelles conformément aux dispositions du RGPD, cliquez sur le bouton [BTN: Anonymiser] en haut de sa fiche :
                 Après confirmation, le système efface définitivement toutes ses données nominatives (nom, téléphone, e-mail, adresses) et les remplace par des identifiants anonymes. 
                 L'historique des tickets et des règlements comptables reste quant à lui scellé et conservé en base de données, assurant une conformité fiscale irréprochable avec les normes NF525.
+                [WARNING]Blocage légal B2B (10 ans) : L'anonymisation est automatiquement bloquée si le client présente un encours B2B non nul ou s'il détient au moins une facture ou un avoir B2B émis depuis moins de 10 ans (obligation légale de conservation comptable).
                 `
         },
         {
@@ -176,6 +178,7 @@ export default {
                 1. L'intégralité de l'historique d'achats, des factures et des avoirs de la fiche doublon est réattribuée au compte principal.
                 2. Les soldes de points de fidélité sont mathématiquement additionnés.
                 3. La fiche absorbée est définitivement masquée de l'annuaire pour ne plus polluer les recherches en caisse.
+                [WARNING]Garde-fou B2B : Par sécurité fiscale et comptable, la fusion bloque l'absorption d'une fiche source qui détient des encours, factures, avoirs ou règlements B2B. Dans ce cas, conservez la fiche portant l'historique B2B comme fiche cible.
                 `
         },
         {
@@ -319,6 +322,7 @@ export default {
                 — [ICON: CheckCircle | 14 | text-teal-600] [KEY: Fusion des téléphones & Communes] : Regroupe les colonnes mobile et fixe en priorisant le numéro portable formaté par paires, conserve l'éventuel second numéro en note et normalise les codes postaux français à 5 chiffres.
 
                 Cliquez sur [BTN: Charger dans le sas de migration] pour injecter les fiches retenues. Tant qu'un client n'est pas validé au comptoir, ses données restent isolées en local et ne sont jamais synchronisées vers le Cloud.
+                [TIP]Sélecteur Clients / Articles : L'assistant de migration dispose désormais d'un sélecteur [BTN: Clients] / [BTN: Articles] en haut de page pour basculer entre la reprise du fichier clients et celle du catalogue produits. Consultez [LINK: CATALOGUE_PIM#migration-base-articles-pos | Sas de Migration Articles].
                 [TIP]Fonctionnement au comptoir : Consultez la section [LINK: TERMINAL_VENTE#crm-fidelite-qualite | Fiche client et bascule en caisse] pour voir comment le vendeur valide ou fusionne une fiche migrée lors du passage du client.
                 `
         }

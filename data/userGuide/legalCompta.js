@@ -26,9 +26,13 @@ export default {
                 — Recettes HT : comptes [KEY: 707000] (Marchandises), [KEY: 701000] (Produits finis) et [KEY: 706000] (Prestations de services).
                 — Acomptes clients sur commandes : compte [KEY: 419110] (crédité lors de l'encaissement de l'acompte avec collecte immédiate de la TVA par taux selon l'art. 269 du CGI, puis débité lors de la reprise sur la facture de solde, d'un remboursement ou d'un abandon).
                 — Avoirs & Cartes cadeaux : comptes [KEY: 419100] (avoirs et émissions/remboursements de cartes cadeaux) et [KEY: 488700] (cartes cadeaux utilisées en paiement).
+                — Ventes B2B en compte à facturer : compte d'attente [KEY: 418100] (« Clients — factures à établir ») crédité/soldé lors de l'émission ultérieure de la facture B2B.
                 — TVA Collectée : sous-comptes spécifiques selon le taux légal : [KEY: 445712] (TVA 20 %), [KEY: 445711] (TVA 10 %), [KEY: 445715] (TVA 5,5 %) et [KEY: 445718] (TVA 2,1 %).
                 — Contreparties d'encaissements : comptes [KEY: 512000] (CB), [KEY: 531000] (Caisse Espèces), [KEY: 511200] (Remise Chèques) et [KEY: 512001] (Ventes Web).
                 — Indemnités et régularisation des arrondis : les acomptes conservés suite à un abandon client (indemnité de dédit hors champ de TVA à 0 %) ainsi que les produits divers sont comptabilisés en [KEY: 758000] ; le système équilibre en outre chaque journée au centime près en imputant automatiquement les écarts d'arrondis monétaires sur les comptes [KEY: 658000] ou [KEY: 758000].
+
+                [ST][ICON: Briefcase | 14 | text-indigo-700] Journaux & Registres B2B (FA / BQ et CSV liasse) :
+                Pour les entreprises utilisant la facturation B2B, la liasse comptable mensuelle intègre automatiquement les écritures des journaux [KEY: FA] (émission des factures/avoirs B2B avec bascule [KEY: 418100] → [KEY: 411000] / compte auxiliaire client et facturation des BL externes) et [KEY: BQ] (règlements Back-Office), ainsi que deux exports CSV dédiés : [KEY: Registre_Factures_B2B_{YYYY-MM}.csv] et [KEY: Reglements_B2B_{YYYY-MM}.csv]. En cas de facturation B2B tardive sur un mois déjà exporté, la liasse du mois concerné est automatiquement marquée à régénérer pour le Cloud.
                 
                 [ST][ICON: DollarSign | 14 | text-teal-600] 2. Journal de Caisse (Code Journal OD) :
                 Historique chronologique de l'ensemble des flux du tiroir non issus des ventes directes : apports de monnaie, achats de fournitures immédiates, prélèvements gérance et surtout l'ensemble des dépôts d'espèces envoyés en banque lors des fins de service.
@@ -140,8 +144,8 @@ export default {
                 
                 [ST][ICON: FileText | 14 | text-teal-600] 1. Le Fichier FEC Officiel (Format DGFIP) :
                 Génère le fichier réglementaire au format texte tabulé (TSV) normé selon les spécifications strictes de l'administration fiscale (portant le nommage officiel [KEY: {SIREN}FEC{AAAAMMJJ}.txt]).
-                — Il consigne ligne à ligne l'ensemble des écritures de vente du code journal « VT ».
-                — Chaque écriture regroupe toutes les lignes comptables d'une journée sous un numéro séquentiel unique avec référence à la clôture correspondante (ex : « Z-42 »).
+                — Il consigne ligne à ligne l'ensemble des écritures du journal des ventes ([KEY: VT]) ainsi que, pour l'activité B2B, les journaux de facturation ([KEY: FA], avec comptes auxiliaires clients [KEY: 411...]) et de règlements Back-Office ([KEY: BQ]).
+                — Chaque écriture regroupe toutes les lignes comptables d'une journée sous un numéro séquentiel unique avec référence à la clôture correspondante (ex : « Z-42 ») ou au numéro de facture/règlement B2B.
                 — Il détaille les montants de débits et crédits pour les comptes de ventes, les acomptes/cartes cadeaux, la TVA par taux et les règlements financiers avec équilibrage parfait des arrondis.
                 
                 [ST][ICON: Lock | 14 | text-teal-600] 2. La Bande de Contrôle (Détail inaltérable des tickets) :

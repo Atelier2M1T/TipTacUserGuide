@@ -154,6 +154,13 @@ export default {
                 Ce pavé protège les données fiscales les plus sensibles de l'entreprise :
                 Il regroupe les droits de téléchargement des [BTN: Archives Fiscales], l'accès aux [BTN: Exports Comptables FEC] et les outils de [BTN: Contrôle DGFIP]. 
                 Pour des raisons de conformité, ces cases sont verrouillées en gris pour les vendeurs et préparateurs.
+
+                [T]5. Facturation B2B & Encours Clients
+                Quatre autorisations dédiées encadrent les opérations de crédit et de facturation professionnelle :
+                — [KEY: Gestion crédit & comptes B2B] : Autorise l'activation du paiement en compte, le réglage des plafonds d'encours, le blocage/déblocage de comptes et les tarifs B2B sur les fiches clients.
+                — [KEY: Déblocage dépassement plafond B2B] : Permet d'autoriser ponctuellement par code PIN une vente [KEY: EN_COMPTE] ou un BL dépassant le plafond autorisé.
+                — [KEY: Facturation B2B & Avoirs] : Donne accès à la création de brouillons, à l'émission définitive des factures ([KEY: FAC-YYYY-XXXX]) et à la génération d'avoirs ([KEY: AVO-YYYY-XXXX]).
+                — [KEY: Règlements B2B & Lettrage] : Autorise l'enregistrement des règlements Back-Office et comptoir, le lettrage multi-factures et l'annulation/rejet d'un règlement impayé.
                 
                 [T]Validation des modifications
                 Dès que vous modifiez un champ ou un interrupteur, le bouton flottant en haut à droite s'illumine en vert foncé avec la mention [BTN: Enregistrer le profil]. 

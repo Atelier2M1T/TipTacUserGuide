@@ -105,6 +105,7 @@ export default {
                 En sélectionnant un magasin spécifique, la console ouvre une vue d'inspection directe :
                 — [KEY: Synthèse financière] : CA HT/TTC, répartition des moyens de règlement et cumul perpétuel.
                 — [KEY: Journal des Ventes (VT)] : Ventilation exacte des comptes de produits (707, 701, 706) et de TVA collectée.
+                — [KEY: Facturation & Règlements B2B] : Onglet dédié affichant les registres mensuels B2B (factures, avoirs et règlements issus de la liasse du mois).
                 — [KEY: Démarque comptable] : Pertes et casses réelles valorisées au prix d'achat HT.
                 — [KEY: État des stocks valorisé] : Valeur comptable brute immobilisée à la clôture du mois.
                 — Pour les aspects juridiques et le détail des contrôles fiscaux, consultez le chapitre [LINK: LEGAL_COMPTA | Légal, Compta & Contrôle DGFIP].
@@ -130,6 +131,7 @@ export default {
                 [T]Accès aux guides détaillés des modules partagés
                 Retrouvez le fonctionnement détaillé de ces composants transverses dans leurs chapitres respectifs :
                 — [ICON: Users | 14 | text-purple-700] [LINK: CLIENTS_CRM | Annuaire Clients, CRM & Fidélité] : Segmentation, fusions de doublons et règles d'acquisition.
+                — [ICON: Briefcase | 14 | text-indigo-700] [LINK: FACTURATION_B2B | Facturation B2B, Encours & Factur-X] : Comptes professionnels, encours, facturation NF525 et règlements.
                 — [ICON: Target | 14 | text-rose-600] [LINK: MARKETING_PROMOTIONS | Marketing, Promos & Titres Cadeaux] : Éditeur e-mail, campagnes SMS et bons d'achat.
                 — [ICON: Box | 14 | text-amber-700] [LINK: CATALOGUE_PIM | Catalogue Articles & Variantes] : Fiches produits, matrice de déclinaisons et importations.
                 — [ICON: Truck | 14 | text-blue-700] [LINK: ACHATS_FOURNISSEURS | Achats, Fournisseurs & Réceptions] : Commandes d'approvisionnement et franco de port.
@@ -196,6 +198,42 @@ export default {
                 — [KEY: Séquence temporelle] : Ouvrez la boîte noire pour rejouer l'ordre exact des suppressions ou ajustements tarifaires à la seconde près.
                 — [KEY: Consultation du ticket final] : Un clic sur le bouton bleu [BTN: Ticket N°...] télécharge depuis l'entrepôt BigQuery la copie authentique et certifiée du ticket d'origine. Vous visualisez les moyens de paiement utilisés (ex: Espèces vs CB) pour confirmer ou lever le doute sur un comportement suspect.
                 [CLEAR]
+                `
+        },
+        {
+            id: "cloud-facturation-encours-b2b",
+            title: "8. Facturation & Encours B2B sur TipTac Cloud (Multi-sites, Relances & Ordres)",
+            content:
+                `
+                Le module Cloud « Facturation & Encours B2B » ([PLAN: PLAN CONNECT] ou supérieur) permet à la direction, à l'administration des ventes et au cabinet comptable de piloter l'ensemble des comptes professionnels du réseau sans intervenir sur les caisses physiques.
+
+                [T]Vue par magasin et consolidation multi-sites face au plafond global
+                Depuis le sélecteur d'établissement en haut de l'écran :
+                — **Vue Magasin** : Affiche les encours, les factures et les règlements propres à un point de vente donné.
+                — **Vue Consolidée « Réseau (Tous) »** : Agrège en direct les encours de tous vos magasins par client professionnel et compare ce total consolidé au **plafond d'encours global** et au statut de blocage définis sur la fiche client réseau.
+                — **Balance Âgée & Relevé de compte** : Consultez la ventilation des retards ([KEY: Non échu], [KEY: 1–30 j], [KEY: 31–60 j], [KEY: 61–90 j], [KEY: > 90 j]) et éditez ou imprimez au format A4 le [BTN: Relevé de compte] d'un client B2B.
+
+                [T]Registre des factures, avoirs et téléchargements privés
+                Le registre liste toutes les factures ([KEY: FAC-YYYY-XXXX]) et avoirs ([KEY: AVO-YYYY-XXXX]) remontés automatiquement par vos caisses maîtresses :
+                — **Téléchargement authentifié sécurisé** : Récupérez sans lien public exposé le [KEY: PDF original d'émission] (strictement figé au jour de l'émission), l'archive structurée [KEY: Factur-X JSON] (EN 16931) ou le détail complet de la pièce.
+                — **Duplicata « ACQUITTÉE » à la volée** : Dès qu'une facture atteint le statut [KEY: PAYEE], le Cloud génère à la volée un duplicata PDF A4 conforme estampillé du tampon [KEY: ACQUITTÉE] et du récapitulatif des règlements perçus.
+
+                [T]Relances e-mail et envoi de duplicatas PDF (Brevo)
+                Depuis une facture ou par sélection multiple (jusqu'à [KEY: 25 factures] par lot), cliquez sur [BTN: Envoyer par e-mail / Relancer] :
+                — Choisissez d'envoyer un **Duplicata PDF** ou une **Relance d'impayé** vers l'e-mail de facturation du client (modifiable à l'envoi) avec message personnalisé optionnel et pièce jointe PDF originale.
+                — **Journal des e-mails B2B** : Chaque tentative (succès ou erreur) est tracée dans l'onglet dédié avec mise à jour automatique du compteur de relances sur la facture.
+                — **Gestion des erreurs de passerelle e-mail** : Si la clé API Brevo du compte est manquante, expirée ou invalide, ou si le PDF original n'a pas encore été archivé par la caisse, un message explicite en français vous indique exactement l'action corrective à mener.
+
+                [T]File d'ordres descendante Cloud → Caisse (Onglet « Ordres Caisse »)
+                Pour agir à distance tout en respectant l'inaltérabilité fiscale NF525 des caisses, trois types d'ordres sont exécutés automatiquement par la caisse maîtresse du magasin ciblé :
+                [ST][ICON: CreditCard | 14 | text-indigo-600] 1. Intention de règlement Back-Office ([KEY: PAYMENT_INTENT]) :
+                Enregistrez depuis le Cloud un paiement reçu en banque ([KEY: VIREMENT], [KEY: CHEQUE], [KEY: PRELEVEMENT] ou [KEY: CARTE_PRO] uniquement — les règlements [KEY: Espèces] et [KEY: CB] comptoir restent strictement réservés au magasin). La caisse applique le règlement avec lettrage multi-factures de manière idempotente (sans doublon possible).
+                [ST][ICON: FileText | 14 | text-amber-600] 2. Demande de brouillon de facture ([KEY: DRAFT_REQUEST]) :
+                Ordonnez à distance la création d'un **brouillon** de facture B2B sur une période donnée. Par garde-fou NF525, le Cloud ne peut jamais émettre ou sceller une facture à la place de la caisse : la validation et l'émission définitive ([KEY: FAC-YYYY-XXXX]) restent effectuées sur le terminal magasin.
+                [ST][ICON: Sliders | 14 | text-teal-600] 3. Paramètres commerciaux B2B & Fiche Client Cloud ([KEY: CLIENT_B2B_PARAMS]) :
+                Modifiez depuis la fiche client Cloud ([BTN: Modifier Client]) les paramètres B2B du client (plafond d'encours global, blocage/déblocage, délai et mode d'échéance, tarification B2B, code auxiliaire, SIREN, e-mail de facturation, adresse de livraison) : un ordre synchronisé met à jour les caisses automatiquement. Les mêmes protections RGPD (blocage d'anonymisation pendant 10 ans ou si encours non nul) et de fusion s'appliquent sur le Cloud.
+
+                Dans l'onglet [BTN: Ordres Caisse], suivez l'état en temps réel de chaque ordre envoyé : [KEY: EN ATTENTE], [KEY: EN COURS], [KEY: APPLIQUÉ], [KEY: REJETÉ] ou [KEY: ÉCHEC] (avec motif détaillé en cas de rejet).
                 `
         }
     ]

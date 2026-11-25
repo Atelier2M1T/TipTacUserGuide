@@ -560,7 +560,7 @@ export const UserGuide = ({ onClose, defaultTab = 'TERMINAL_VENTE' }) => {
                     {/* COLONNE 1 : LES 16 CHAPITRES */}
                     <div className="w-64 bg-white border-r border-gray-200 flex flex-col shrink-0 overflow-y-auto">
                         <div className="p-3 border-b border-gray-100 text-[10px] font-black uppercase tracking-wider text-gray-400">
-                            Chapitres (16)
+                            Chapitres ({Object.keys(USER_GUIDE_MANIFEST).length})
                         </div>
                         <div className="flex flex-col py-1">
                             {Object.entries(USER_GUIDE_MANIFEST).map(([key, manifest]) => {

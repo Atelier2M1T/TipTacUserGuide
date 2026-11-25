@@ -177,6 +177,7 @@ export default {
                 — En pied de colonne, deux synthèses financières automatisent votre remise :
                   • [KEY: Banque Total (Journée + Z)] : cumule les dépôts effectués en cours de journée et les prélèvements de fin de service.
                   • [KEY: Caisse Globale (Restant)] : somme exacte des espèces physiques restant dans les tiroirs de l'ensemble du magasin.
+                [TIP]Isolation comptable des flux B2B : Les ventes comptoir [KEY: EN_COMPTE] sont intégrées au Chiffre d'Affaires et à la TVA de la journée, mais sont isolées hors du tiroir espèces et de la télécollecte TPE. À l'inverse, les encaissements de factures B2B déjà émises ([KEY: REGLEMENT_FACTURE]) sont pris en compte dans le contrôle du tiroir et du TPE sans être comptés une seconde fois dans le CA du jour.
                 [CLEAR]
                 
                 [📸 session_force_z_modal.jpg | left | md]
@@ -219,6 +220,7 @@ export default {
                 — [KEY: Mouvements acomptes] : Encart dédié affiché automatiquement dès qu'une opération sur acompte a eu lieu sur la période, détaillant les [KEY: Acomptes encaissés], [KEY: Acomptes repris], [KEY: Acomptes remboursés] et [KEY: Indemnités abandon].
                 — [KEY: Ventilation TVA par taux] : Détaille pour chaque taux légal la base soumise et le montant de taxe collecté (ex : [KEY: TVA 20% (HT: 150.00 €) : 30.00 €]).
                 — [KEY: Répartition des encaissements] : Détaille chaque mode de règlement perçu avec son volume de transactions (quantité). Les lignes dont le solde net est nul (0,00 €) sont automatiquement épurées pour une parfaite clarté.
+                — [KEY: Flux B2B (En compte & Règlements)] : Distingue clairement les ventes [KEY: EN_COMPTE] (incluses dans le CA et la TVA mais hors espèces/TPE) des encaissements de factures B2B au comptoir ([KEY: REGLEMENT_FACTURE], comptés dans le tiroir/TPE mais exclus du CA).
                 — [KEY: Détail par Caisse & Web] : Liste chaque terminal physique (avec son CA, son écart, son dépôt, son fond laissé et la ventilation de ses paiements) ainsi que la ligne dédiée [KEY: 🌐 Boutique Web] pour les flux Click & Collect en ligne.
                 — [KEY: Mouvements de Tiroir] : Récapitule le fond initial, les ventes espèces, les entrées/sorties diverses, le montant [KEY: THÉORIQUE EN CAISSE], le [KEY: COMPTÉ (RÉEL)] et l'[KEY: ÉCART CONSTATÉ], suivi du [KEY: TOTAL DÉPOSÉ BANQUE] et du [KEY: FOND LAISSÉ POUR DEMAIN].
                 [NOTE]Archives Périodiques : Lors de l'édition d'une clôture mensuelle ou annuelle, les sections physiques de pointage de tiroir sont automatiquement masquées pour se concentrer sur les agrégats fiscaux et comptables.
